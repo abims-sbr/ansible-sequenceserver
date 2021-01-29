@@ -1,0 +1,9 @@
+--- 
+
+# Ubuntu 18 specific tasks
+
+- name: Ubuntu 18 | Add rubygems bin dir to system-wide $PATH
+  copy:
+    dest: "/etc/profile.d/ruby.sh"
+    content: 'PATH=$PATH:{{ sequenceserver_gem_bin_path }}'
+

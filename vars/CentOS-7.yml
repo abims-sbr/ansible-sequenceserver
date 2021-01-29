@@ -1,0 +1,32 @@
+---
+
+# Service (systemd)
+#
+# KillMode value used in the service configuration
+sequenceserver_systemd_killmode: control-group
+
+# NGINX
+#
+# Packages required for compiling the nginx-ldap-auth module
+sequenceserver_nginx_base:
+  - pcre-devel
+  - zlib-devel
+  - openldap-devel
+  - openssl-devel
+
+# Ruby gem
+#
+# Packages required for sequenceserver
+sequenceserver_ruby_base:
+  - rh-ruby25
+  - rh-ruby25-ruby-devel
+# Absolute gem root path
+sequenceserver_gem_root_path: "/opt/rh/rh-ruby25/root"
+# Absolute gem bin path
+sequenceserver_gem_bin_path: "{{ sequenceserver_gem_root_path }}/usr/local/bin"
+
+# Sequenceserver configuration
+#
+# Sequenceserver executable
+sequenceserver_exec: "/usr/bin/scl enable $RH_RUBY25_SCLS_ENABLED -- {{ sequenceserver_gem_bin_path }}"
+
