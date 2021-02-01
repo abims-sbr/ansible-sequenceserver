@@ -38,7 +38,7 @@
   git:
     repo: 'https://github.com/kvspb/nginx-auth-ldap.git'
     dest: "{{ sequenceserver_nginx_loaded_sources_path }}/nginx-auth-ldap"
-    version: v0.1
+    version: 83c059b73566c2ee9cbda920d91b66657cf120b7
   register: get_ldap_auth_source
 
 - name: Install packages required for compiling the nginx module
