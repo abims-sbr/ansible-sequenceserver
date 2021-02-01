@@ -9,12 +9,12 @@
     - name: Install miniconda
       include_role:
         name: andrewrothstein.miniconda
-      vars: 
+      vars:
         miniconda_parent_dir: /usr/local
     - name: Install conda env with blast conda package
       include_role:
         name: andrewrothstein.conda-env
-      vars: 
+      vars:
         conda_env_name: blast
         conda_env_environment: tests/env.yml
         conda_env_conda_dir: /usr/local/miniconda
@@ -22,6 +22,5 @@
     - ../../
   vars:
     sequenceserver_blast_binarie: /usr/local/miniconda/envs/blast/bin
-    sequenceserver_blast_db: 
+    sequenceserver_blast_db:
       - { name: 'my_db', port: '4567', path: 'tests/test-data/my_db' }
-

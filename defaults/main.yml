@@ -1,4 +1,4 @@
---- 
+---
 
 # Ruby gem
 #
@@ -14,9 +14,9 @@ sequenceserver_version: 2.0.0.rc8
 # users: Optional. Useful if the database needs restricted access. List of authorized users (ldap uid).
 # groups: TODO. Optional. Useful if the database needs restricted access. List of authorized groups.
 # ldap_businesscategory: Optional. Useful if the database needs restricted access. A ldap businessCategory value. Ldap users with this businessCategory value will have access to the database.
-# web_page_title: Optional. The title displayed at the top of the web page. If not provided, the default title is "BLAST server for <name>". 
+# web_page_title: Optional. The title displayed at the top of the web page. If not provided, the default title is "BLAST server for <name>".
 #
-sequenceserver_blast_db: 
+sequenceserver_blast_db:
 #   - { name: 'my_db', port: '4567', path: '/path/to/my/db', users: ['fbar','jsmith'], web_page_title: 'blablabla' }
 
 # NCBI BLAST and SLURM variables
@@ -53,6 +53,6 @@ sequenceserver_user: "sequenceserver"
 #
 # proxy_read_timeout (nginx directive)
 sequenceserver_proxy_read_timeout: 180
-# Authentication with LDAP - Mandatory if users, groups or ldap_businesscategory are used in variable sequenceserver_blast_db 
+# Authentication with LDAP - Mandatory if users, groups or ldap_businesscategory are used in variable sequenceserver_blast_db
 # Sequenceserver_ldap_url: "ldap://ldap.my-domain.org/o=my-domain,c=org?uid?sub?"
 sequenceserver_ldap_url: ""

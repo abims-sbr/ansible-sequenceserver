@@ -16,7 +16,7 @@
     state: restarted
     enabled: yes
   when: item.changed
-  with_items: 
+  with_items:
     - "{{ service.results }}"
     - "{{ config.results }}"
 
