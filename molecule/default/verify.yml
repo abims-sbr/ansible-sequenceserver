@@ -1,0 +1,14 @@
+---
+- name: Verify
+  hosts: all
+  become: true
+  tasks:
+    - name: Test SequenceServer installation
+      command: "sequenceserver --version"
+      register: sequenceserver_command
+      failed_when: sequenceserver_command.rc > 0
+    - name: Test that SequenceServer service is running for my_db
+      systemd:
+        name: sequenceserver-my_db.service
+      register: service_result
+      failes_when: service_result.status.SubState != 'running'
