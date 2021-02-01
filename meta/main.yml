@@ -8,3 +8,30 @@ dependencies:
     version: 2.1.0
     tags: never
 
+galaxy_info:
+  role_name: sequenceserver
+  author: loraine-gueguen
+  description: Installs SequenceServer on Linux and deploys one NCBI BLAST+ server for each BLAST database, reverse-proxied by NGINX, submitting jobs on a SLURM HPC cluster
+  issue_tracker_url: https://github.com/abims-sbr/ansible-sequenceserver/issues
+  company: "CNRS, Sorbonne Université, UMR8227 / FR2424 (ABiMS), Station Biologique, 29680, Roscoff, France"
+  license: "license (MIT)"
+  min_ansible_version: 2.4
+  platforms:
+    - name: EL
+      versions:
+        - all
+    - name: Fedora
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - all
+  galaxy_tags:
+    - sequenceserver
+    - blast
+    - query
+    - database
+    - sequence
