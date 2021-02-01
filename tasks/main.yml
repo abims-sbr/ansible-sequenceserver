@@ -96,17 +96,20 @@
   template:
     src: syslog.j2
     dest: "/etc/rsyslog.d/sequenceserver.conf"
+    mode: 0644
   notify: Restart syslog service
 
 - name: Generate logrotate file
   template:
     src: logrotate.j2
     dest: "/etc/logrotate.d/sequenceserver"
+    mode: 0644
 
 - name: Generate sequenceserver.service (systemd) for each database
   template:
     src: service.j2
     dest: "/etc/systemd/system/sequenceserver-{{ item.name }}.service"
+    mode: 0644
   with_items: "{{ sequenceserver_blast_db }}"
   register: service
   notify:
@@ -117,6 +120,7 @@
   template:
     src: sequenceserver.conf.j2
     dest: "{{ sequenceserver_home_path }}/{{ sequenceserver_config_dir }}/sequenceserver.{{ item.name }}.conf"
+    mode: 0644
   with_items: "{{ sequenceserver_blast_db }}"
   register: config
   notify: Restart changed sequenceserver services
@@ -125,6 +129,7 @@
   template:
     src: sequenceserver.rb.j2
     dest: "{{ sequenceserver_home_path }}/{{ sequenceserver_extension_dir }}/sequenceserver.{{ item.name }}.rb"
+    mode: 0644
   with_items: "{{ sequenceserver_blast_db }}"
   register: extension
   notify: Restart changed sequenceserver services
@@ -133,4 +138,5 @@
   template:
     src: nginx_sequenceserver.conf.j2
     dest: /etc/nginx/conf.d/sequenceserver.conf
+    mode: 0644
   notify: "(Handler: All OSs) Reload NGINX"

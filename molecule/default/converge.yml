@@ -2,25 +2,8 @@
 - name: Converge
   hosts: all
   become: true
-  pre_tasks:
-    - name: Update apt cache.
-      apt: update_cache=true cache_valid_time=600
-      when: ansible_os_family == 'Debian'
-    - name: Install miniconda
-      include_role:
-        name: andrewrothstein.miniconda
-      vars:
-        miniconda_parent_dir: /usr/local
-      tags: molecule-idempotence-notest
-    - name: Install conda env with blast conda package
-      include_role:
-        name: andrewrothstein.conda-env
-      vars:
-        conda_env_name: blast
-        conda_env_environment: tests/env.yml
-        conda_env_conda_dir: /usr/local/anaconda
   roles:
-    - ../../
+    - abims_sbr.sequenceserver
   vars:
     sequenceserver_blast_binarie: /usr/local/miniconda/envs/blast/bin
     sequenceserver_blast_db:

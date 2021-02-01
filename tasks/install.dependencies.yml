@@ -9,7 +9,7 @@
 # NGINX LDAP authentication
 
 - name: Get installed Nginx version
-  command:
+  command: # noqa 301
     cmd: nginx -v
   register: get_nginx_version
   check_mode: no
@@ -38,6 +38,7 @@
   git:
     repo: 'https://github.com/kvspb/nginx-auth-ldap.git'
     dest: "{{ sequenceserver_nginx_loaded_sources_path }}/nginx-auth-ldap"
+    version: v0.1
   register: get_ldap_auth_source
 
 - name: Install packages required for compiling the nginx module
@@ -58,12 +59,13 @@
   with_items:
     - "./configure --with-compat --add-dynamic-module={{ sequenceserver_nginx_loaded_sources_path }}/nginx-auth-ldap"
     - make modules
-  when: stat_module.stat.exists == False
+  when: not stat_module.stat.exists
 
 - name: Copy the nginx-ldap-auth module library to the nginx module directory
   copy:
     src: "{{ sequenceserver_nginx_loaded_sources_path }}/nginx-{{ sequenceserver_nginx_version }}/objs/ngx_http_auth_ldap_module.so"
     dest: /etc/nginx/modules/
+    mode: 0644
     remote_src: yes
 
 - name: Insert the load_module directive in nginx conf
