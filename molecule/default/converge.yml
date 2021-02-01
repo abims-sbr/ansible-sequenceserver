@@ -11,6 +11,7 @@
         name: andrewrothstein.miniconda
       vars:
         miniconda_parent_dir: /usr/local
+      tags: molecule-idempotence-notest
     - name: Install conda env with blast conda package
       include_role:
         name: andrewrothstein.conda-env
@@ -23,4 +24,5 @@
   vars:
     sequenceserver_blast_binarie: /usr/local/miniconda/envs/blast/bin
     sequenceserver_blast_db:
+    # yamllint disable-line rule:braces
       - { name: 'my_db', port: '4567', path: 'tests/test-data/my_db' }

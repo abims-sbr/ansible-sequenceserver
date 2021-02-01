@@ -88,9 +88,7 @@
 - name: Modify source lib for HPC integration (https://sequenceserver.com/doc/#hpc)
   replace:
     path: "{{ sequenceserver_lib_to_modify_for_hpc_integration }}"
-    # yamllint disable-line rule:braces
     regexp: '(      def command\n.+\n.+\n      end\n)(\n(?:      #.*\n){4}      def raise!\n)'
-    # yamllint disable-line rule:braces
     replace: '\1\n      # Added by ansible for HPC integration\n      def run\n        system("{{ sequenceserver_home_path }}/{{ sequenceserver_hpc_dir }}/slurm_sbatch.sh #{stdout} #{stderr} #{command}")\n        done!\n      rescue CommandFailed => e\n        done! e.exitstatus\n      end\n\2'
     backup: yes
 
