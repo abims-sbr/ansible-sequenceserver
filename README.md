@@ -1,6 +1,6 @@
 # Ansible Role: SequenceServer
 
-[![Build Status](https://travis-ci.org/abims-sbr/ansible-sequenceserver.svg?branch=master)](https://travis-ci.org/abims-sbr/ansible-sequenceserver)
+[![CI](https://github.com/loraine-gueguen/ansible-sequenceserver/workflows/CI/badge.svg?event=push)](https://github.com/loraine-gueguen/ansible-sequenceserver/actions?query=workflow%3ACI)
 
 An Ansible Role that installs [SequenceServer](https://sequenceserver.com) on Linux and deploys one [NCBI BLAST+](https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastDocs&DOC_TYPE=Download) server for each BLAST database, reverse-proxied by NGINX, submitting jobs on a [SLURM](https://slurm.schedmd.com/) HPC cluster
 
