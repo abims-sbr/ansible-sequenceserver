@@ -45,7 +45,7 @@
   package:
     state: present
     name: "{{ sequenceserver_nginx_base }}"
-  when: nginx_base is defined
+  when: sequenceserver_nginx_base is defined
 
 - name: Check if the compiled nginx-ldap-auth module is already present
   stat:
