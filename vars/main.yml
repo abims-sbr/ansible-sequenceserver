@@ -37,4 +37,3 @@ sequenceserver_server_name: "{{ inventory_hostname }}"
 sequenceserver_proxy_intercept_errors: "on"
 # proxy_connect_timeout (nginx directive)
 sequenceserver_proxy_connect_timeout: 8
-

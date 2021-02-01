@@ -11,4 +11,3 @@
   copy:
     dest: "/opt/rh/rh-ruby25/service-environment"
     content: 'RH_RUBY25_SCLS_ENABLED="rh-ruby25"'
-

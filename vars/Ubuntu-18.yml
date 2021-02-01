@@ -29,4 +29,3 @@ sequenceserver_gem_bin_path: "{{ sequenceserver_gem_root_path }}/usr/local/share
 #
 # Sequenceserver executable
 sequenceserver_exec: "{{ sequenceserver_gem_bin_path }}"
-

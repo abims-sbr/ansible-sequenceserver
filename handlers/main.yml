@@ -26,4 +26,3 @@
     state: restarted
     enabled: yes
   with_items: "{{ sequenceserver_blast_db }}"
-

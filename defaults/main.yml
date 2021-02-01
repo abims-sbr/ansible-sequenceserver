@@ -56,4 +56,3 @@ sequenceserver_proxy_read_timeout: 180
 # Authentication with LDAP - Mandatory if users, groups or ldap_businesscategory are used in variable sequenceserver_blast_db 
 # Sequenceserver_ldap_url: "ldap://ldap.my-domain.org/o=my-domain,c=org?uid?sub?"
 sequenceserver_ldap_url: ""
-

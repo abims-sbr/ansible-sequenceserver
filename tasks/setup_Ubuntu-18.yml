@@ -6,4 +6,3 @@
   copy:
     dest: "/etc/profile.d/ruby.sh"
     content: 'PATH=$PATH:{{ sequenceserver_gem_bin_path }}'
-

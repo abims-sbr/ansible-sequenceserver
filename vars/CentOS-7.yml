@@ -29,4 +29,3 @@ sequenceserver_gem_bin_path: "{{ sequenceserver_gem_root_path }}/usr/local/bin"
 #
 # Sequenceserver executable
 sequenceserver_exec: "/usr/bin/scl enable $RH_RUBY25_SCLS_ENABLED -- {{ sequenceserver_gem_bin_path }}"
-

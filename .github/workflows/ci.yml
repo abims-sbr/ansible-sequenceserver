@@ -60,7 +60,7 @@ jobs:
           MOLECULE_DISTRO: ${{ matrix.distro }}
 
       - name: Test SequenceServer installation
-        run: > sequenceserver --version && (echo 'SequenceServer availability test: pass' && exit 0) || (echo 'SequenceServer availability test: fail' && exit 1)
+        run: sequenceserver --version && (echo 'SequenceServer availability test: pass' && exit 0) || (echo 'SequenceServer availability test: fail' && exit 1)
 
       - name: Test that SequenceServer service is running for my_db
-        run: > systemctl show -p SubState sequenceserver-my_db.service | grep -q 'SubState=running' && (echo 'SequenceServer service running test: pass' && exit 0) || (echo 'SequenceServer service running test: fail' && exit 1)
+        run: systemctl show -p SubState sequenceserver-my_db.service | grep -q 'SubState=running' && (echo 'SequenceServer service running test: pass' && exit 0) || (echo 'SequenceServer service running test: fail' && exit 1)
