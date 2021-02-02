@@ -9,6 +9,7 @@
   service:
     name: rsyslog
     state: restarted
+    enabled: yes
 
 - name: Restart changed sequenceserver services
   service:
