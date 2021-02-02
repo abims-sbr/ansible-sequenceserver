@@ -26,6 +26,12 @@
     name: "{{ sequenceserver_ruby_base }}"
   when: sequenceserver_ruby_base is defined
 
+- name: Include os specific tasks
+  include_tasks: "{{ item }}"
+  with_first_found:
+    - "setup_{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+    - "setup_{{ ansible_distribution }}.yml"
+
 - name: Install Ruby gems
   gem:
     state: present
@@ -35,12 +41,6 @@
     version: "{{ sequenceserver_version }}"
     install_dir: "{{ sequenceserver_gem_install_dir }}"
   notify: Restart all sequenceserver services
-
-- name: Include os specific tasks
-  include_tasks: "{{ item }}"
-  with_first_found:
-    - "setup_{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
-    - "setup_{{ ansible_distribution }}.yml"
 
 - name: Create sequenceserver home directories if it does not exist
   file:
