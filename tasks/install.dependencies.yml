@@ -13,7 +13,7 @@
     cmd: nginx -v
   register: get_nginx_version
   check_mode: no
-  changed_when: not sequenceserver_nginx_version
+  changed_when: sequenceserver_nginx_version is not defined or (sequenceserver_nginx_version is defined and not sequenceserver_nginx_version)
 
 - name: Set nginx_version variable
   set_fact:
