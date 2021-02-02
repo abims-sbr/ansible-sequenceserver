@@ -22,10 +22,10 @@ sequenceserver_ruby_base:
   - ruby-dev
 # Absolute gem root path
 sequenceserver_gem_root_path: ""
-# Absolute gem bin path
-sequenceserver_gem_bin_path: "{{ sequenceserver_gem_root_path }}/usr/local/share/gems/bin"
+# Absolute sequenceserver bin path
+sequenceserver_sequenceserver_bin_path: "{{ sequenceserver_gem_root_path }}/usr/local/share/gems/bin"
 
 # Sequenceserver configuration
 #
 # Sequenceserver executable
-sequenceserver_exec: "{{ sequenceserver_gem_bin_path }}"
+sequenceserver_exec: "{{ sequenceserver_sequenceserver_bin_path }}"

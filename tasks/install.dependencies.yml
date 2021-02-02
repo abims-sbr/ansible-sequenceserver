@@ -8,32 +8,41 @@
 
 # NGINX LDAP authentication
 
+- name: Check if the compiled nginx-ldap-auth module is already present
+  stat:
+    path: /etc/nginx/modules/ngx_http_auth_ldap_module.so
+  register: stat_module
+
 - name: Get installed Nginx version
   command:
     cmd: nginx -v
   register: get_nginx_version
   check_mode: no
-  changed_when: sequenceserver_nginx_version is not defined or (sequenceserver_nginx_version is defined and not sequenceserver_nginx_version)
+  when: not stat_module.stat.exists
 
 - name: Set nginx_version variable
   set_fact:
     sequenceserver_nginx_version: "{{ get_nginx_version.stderr | regex_search('nginx/(?P<version>\\d+\\.\\d+\\.\\d+)', '\\g<version>') | first }}"
+  when: not stat_module.stat.exists
 
 - name: Create directory for nginx related sources if it does not exist
   file:
     path: "{{ sequenceserver_nginx_loaded_sources_path }}"
     state: directory
     mode: '0755'
+  when: not stat_module.stat.exists
 
 - name: Get and unarchive the nginx source (needs same version as the one installed with role nginxinc.nginx)
   unarchive:
     src: 'https://nginx.org/download/nginx-{{ sequenceserver_nginx_version }}.tar.gz'
     dest: "{{ sequenceserver_nginx_loaded_sources_path }}"
     remote_src: yes
+  when: not stat_module.stat.exists
 
 - name: Install Git
   include_role:
     name: geerlingguy.git
+  when: not stat_module.stat.exists
 
 - name: Get source of the nginx-ldap-auth module
   git:
@@ -41,17 +50,13 @@
     dest: "{{ sequenceserver_nginx_loaded_sources_path }}/nginx-auth-ldap"
     version: 83c059b73566c2ee9cbda920d91b66657cf120b7
   register: get_ldap_auth_source
+  when: not stat_module.stat.exists
 
 - name: Install packages required for compiling the nginx module
   package:
     state: present
     name: "{{ sequenceserver_nginx_base }}"
-  when: sequenceserver_nginx_base is defined
-
-- name: Check if the compiled nginx-ldap-auth module is already present
-  stat:
-    path: /etc/nginx/modules/ngx_http_auth_ldap_module.so
-  register: stat_module
+  when: not stat_module.stat.exists and sequenceserver_nginx_base is defined
 
 - name: Compile the nginx-ldap-auth module (https://www.nginx.com/blog/compiling-dynamic-modules-nginx-plus/)
   command:
