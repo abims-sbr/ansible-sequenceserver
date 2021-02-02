@@ -6,6 +6,10 @@
     - name: Update apt cache.
       apt: update_cache=true cache_valid_time=600
       when: ansible_os_family == 'Debian'
+    - name: Install rsyslog
+      include_role:
+        name: robertdebock.rsyslog
+      when: (ansible_distribution == "CentOS" or ansible_distribution == "RedHat") and ansible_distribution_major_version == "7"
     - name: Install miniconda
       include_role:
         name: andrewrothstein.miniconda

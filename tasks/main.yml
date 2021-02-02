@@ -106,11 +106,7 @@
     src: syslog.j2
     dest: "/etc/rsyslog.d/sequenceserver.conf"
     mode: 0644
-  notify:
-    - Reload systemd
-    - Force reload systemd for Centos7
-    - Restart syslog service
-    - Force restart syslog service for Centos7
+  notify: Restart syslog service
 
 - name: Generate logrotate file
   template:
