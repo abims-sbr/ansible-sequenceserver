@@ -5,7 +5,7 @@
   systemd:
     daemon_reload: yes
 
-- name: Force reload systemd for Centos7
+- name: Force reload systemd for Centos7 # noqa 303 305
   shell:
     cmd: "systemctl daemon-reload"
   when: (ansible_distribution == "CentOS" or ansible_distribution == "RedHat") and ansible_distribution_major_version == "7"
@@ -14,6 +14,11 @@
   service:
     name: rsyslog
     state: restarted
+
+- name: Force restart syslog service for Centos7 # noqa 303 305
+  shell:
+    cmd: "systemctl restart rsyslog"
+  when: (ansible_distribution == "CentOS" or ansible_distribution == "RedHat") and ansible_distribution_major_version == "7"
 
 - name: Restart changed sequenceserver services
   service:

@@ -110,6 +110,7 @@
     - Reload systemd
     - Force reload systemd for Centos7
     - Restart syslog service
+    - Force restart syslog service for Centos7
 
 - name: Generate logrotate file
   template:
