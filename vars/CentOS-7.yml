@@ -17,6 +17,8 @@ sequenceserver_nginx_base:
 
 # Ruby gem
 #
+# Repositories to enable for the install/update operation
+sequenceserver_enablerepo: centos-sclo-rh
 # Packages required for sequenceserver
 sequenceserver_ruby_base:
   - rh-ruby25

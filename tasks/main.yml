@@ -16,6 +16,7 @@
   package:
     state: present
     name: "{{ sequenceserver_ruby_base }}"
+    enablerepo: "{{ sequenceserver_enablerepo }}"
   when: sequenceserver_ruby_base is defined
 
 - name: Install Ruby gems

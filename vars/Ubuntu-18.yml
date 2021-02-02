@@ -16,6 +16,8 @@ sequenceserver_nginx_base:
 
 # Ruby gem
 #
+# Repositories to enable for the install/update operation
+sequenceserver_enablerepo: ""
 # Packages required for sequenceserver
 sequenceserver_ruby_base:
   - ruby-full
