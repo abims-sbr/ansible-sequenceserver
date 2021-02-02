@@ -16,3 +16,9 @@ provisioner:
   name: ansible
   playbooks:
     converge: converge.yml
+verifier:
+  name: ansible
+  env: 
+    PATH=$PATH:/usr/local/share/gems/bin
+  playbooks:
+    verify: verify.yml
