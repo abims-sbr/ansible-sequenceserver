@@ -9,10 +9,11 @@
 # NGINX LDAP authentication
 
 - name: Get installed Nginx version
-  command: # noqa 301
+  command:
     cmd: nginx -v
   register: get_nginx_version
   check_mode: no
+  changed_when: not sequenceserver_nginx_version
 
 - name: Set nginx_version variable
   set_fact:
