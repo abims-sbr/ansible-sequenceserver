@@ -5,7 +5,7 @@
   tasks:
     - name: Test SequenceServer installation
       command: # noqa 301
-        cmd: "sequenceserver --version"
+        cmd: ". /etc/profile.d/ruby.sh && sequenceserver --version"
       register: sequenceserver_command
       failed_when: sequenceserver_command.rc > 0
     - name: Test that SequenceServer service is running for my_db
