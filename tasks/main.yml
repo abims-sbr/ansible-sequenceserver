@@ -39,7 +39,7 @@
     user_install: no
     name: sequenceserver
     version: "{{ sequenceserver_version }}"
-    executable: "{{ sequenceserver_gem_bin_path }}"
+    executable: "{{ sequenceserver_gem_executable_path }}"
     install_dir: "{{ sequenceserver_gem_install_dir }}"
   notify: Restart all sequenceserver services
 

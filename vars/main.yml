@@ -5,7 +5,7 @@
 # Absolute path to gem install directory
 sequenceserver_gem_install_dir: "{{ sequenceserver_gem_root_path }}/usr/local/share/gems"
 # Absolute gem bin path
-sequenceserver_gem_bin_path: "{{ sequenceserver_gem_root_path }}/usr/bin"
+sequenceserver_gem_executable_path: "{{ sequenceserver_gem_root_path }}/usr/bin"
 # Absolute path to the directory where the logo image is copied
 sequenceserver_web_public_repository: "{{ sequenceserver_gem_install_dir }}/gems/sequenceserver-{{ sequenceserver_version }}/public"
 # File that is modified to customize the blast server (logo, title and support link)
