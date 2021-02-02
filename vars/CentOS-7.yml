@@ -9,6 +9,7 @@ sequenceserver_systemd_killmode: control-group
 #
 # Packages required for compiling the nginx-ldap-auth module
 sequenceserver_nginx_base:
+  - gcc
   - pcre-devel
   - zlib-devel
   - openldap-devel
