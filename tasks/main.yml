@@ -108,6 +108,7 @@
     mode: 0644
   notify:
     - Reload systemd
+    - Force reload systemd for Centos7
     - Restart syslog service
 
 - name: Generate logrotate file

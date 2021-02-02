@@ -1,15 +1,19 @@
 ---
 # handlers
 
-- name: Restart syslog service
-  systemd:
-    name: rsyslog
-    state: restarted
-    daemon_reload: yes
-
 - name: Reload systemd
   systemd:
     daemon_reload: yes
+
+- name: Force reload systemd for Centos7
+  shell:
+    cmd: "systemctl daemon-reload"
+  when: (ansible_distribution == "CentOS" or ansible_distribution == "RedHat") and ansible_distribution_major_version == "7"
+
+- name: Restart syslog service
+  service:
+    name: rsyslog
+    state: restarted
 
 - name: Restart changed sequenceserver services
   service:

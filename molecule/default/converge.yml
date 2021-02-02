@@ -5,7 +5,7 @@
   roles:
     - abims_sbr.sequenceserver
   vars:
-    sequenceserver_blast_binarie: /usr/local/miniconda/envs/blast/bin
+    sequenceserver_blast_binaries: /usr/local/anaconda/envs/blast/bin
     sequenceserver_blast_db:
     # yamllint disable-line rule:braces
       - { name: 'my_db', port: '4567', path: 'tests/test-data/my_db' }
