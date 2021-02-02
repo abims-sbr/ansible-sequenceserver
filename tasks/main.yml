@@ -17,6 +17,7 @@
     name: centos-sclo-rh
     description: CentOS-7 - SCLo rh
     baseurl: http://centos.crazyfrogs.org/7/sclo/x86_64/rh/
+    gpgkey: http://centos.crazyfrogs.org/RPM-GPG-KEY-CentOS-7
   when: (ansible_distribution == "CentOS" or ansible_distribution == "RedHat") and ansible_distribution_major_version == "7"
 
 - name: Install packages
