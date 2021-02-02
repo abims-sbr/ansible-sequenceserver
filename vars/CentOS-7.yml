@@ -24,7 +24,7 @@ sequenceserver_ruby_base:
 # Absolute gem root path
 sequenceserver_gem_root_path: "/opt/rh/rh-ruby25/root"
 # Absolute gem executable path
-sequenceserver_gem_executable_path: "/usr/bin/scl enable $RH_RUBY25_SCLS_ENABLED -- {{ sequenceserver_gem_root_path }}/usr/bin/gem"
+sequenceserver_gem_executable_path: "/usr/bin/scl enable rh-ruby25 -- {{ sequenceserver_gem_root_path }}/usr/bin/gem"
 # Absolute sequenceserver bin path
 sequenceserver_sequenceserver_bin_path: "{{ sequenceserver_gem_root_path }}/usr/local/bin"
 

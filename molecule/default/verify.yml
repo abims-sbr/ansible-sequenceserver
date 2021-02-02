@@ -2,10 +2,19 @@
 - name: Verify
   hosts: all
   become: true
+  pre_tasks:
+    - name:
+      set_fact: Set sequenceserver_exec variable
+        sequenceserver_exec: "/usr/local/share/gems/bin"
+      when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "18"
+    - name:
+      set_fact: Set sequenceserver_exec variable
+        sequenceserver_exec: "/usr/bin/scl enable rh-ruby25 -- /opt/rh/rh-ruby25/root/usr/local/bin"
+      when: (ansible_distribution == "CentOS" or ansible_distribution == "RedHat") and ansible_distribution_major_version == "7"
   tasks:
     - name: Test SequenceServer installation
       command: # noqa 301
-        cmd: ". /etc/profile.d/ruby.sh && sequenceserver --version"
+        cmd: "{{ sequenceserver_exec }}/sequenceserver --version"
       register: sequenceserver_command
       failed_when: sequenceserver_command.rc > 0
     - name: Test that SequenceServer service is running for my_db

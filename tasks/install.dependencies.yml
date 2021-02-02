@@ -25,7 +25,7 @@
       register: get_nginx_version
       check_mode: no
 
-    - name: Set nginx_version variable
+    - name: Set sequenceserver_nginx_version variable
       set_fact:
         sequenceserver_nginx_version: "{{ get_nginx_version.stderr | regex_search('nginx/(?P<version>\\d+\\.\\d+\\.\\d+)', '\\g<version>') | first }}"
 
