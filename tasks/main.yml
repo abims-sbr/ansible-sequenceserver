@@ -12,11 +12,12 @@
 - name: Install Dependencies
   include_tasks: install.dependencies.yml
 
-- name: Include os specific tasks
-  include_tasks: "{{ item }}"
-  with_first_found:
-    - "setup_{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
-    - "setup_{{ ansible_distribution }}.yml"
+- name: CentOS 7 | Add repository
+  yum_repository:
+    name: centos-sclo-rh
+    description: CentOS-7 - SCLo rh
+    baseurl: http://centos.crazyfrogs.org/7/sclo/x86_64/rh/
+  when: (ansible_distribution == "CentOS" or ansible_distribution == "RedHat") and ansible_distribution_major_version == "7"
 
 - name: Install packages
   package:
@@ -33,6 +34,12 @@
     version: "{{ sequenceserver_version }}"
     install_dir: "{{ sequenceserver_gem_install_dir }}"
   notify: Restart all sequenceserver services
+
+- name: Include os specific tasks
+  include_tasks: "{{ item }}"
+  with_first_found:
+    - "setup_{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+    - "setup_{{ ansible_distribution }}.yml"
 
 - name: Create sequenceserver home directories if it does not exist
   file:
