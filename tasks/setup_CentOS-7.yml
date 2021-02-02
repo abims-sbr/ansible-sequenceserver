@@ -2,6 +2,12 @@
 
 # CentOS 7 specific tasks
 
+- name: CentOS 7 | Add repository
+  yum_repository:
+    name: centos-sclo-rh
+    description: CentOS-7 - SCLo rh
+    baseurl: http://centos.crazyfrogs.org/7/sclo/x86_64/rh/
+
 - name: CentOS 7 | Enable environment variable
   copy:
     src: "rh-ruby25.sh"
