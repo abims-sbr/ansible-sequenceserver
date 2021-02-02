@@ -4,7 +4,7 @@
   become: true
   tasks:
     - name: Test SequenceServer installation
-      command: # noqa 301
+      shell: # noqa 301
         cmd: "export PATH=$PATH:/usr/local/share/gems/bin && /usr/local/share/gems/bin/sequenceserver --version"
       register: sequenceserver_command
       failed_when: sequenceserver_command.rc > 0
