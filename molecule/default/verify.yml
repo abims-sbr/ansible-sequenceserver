@@ -30,6 +30,6 @@
 #        name: sequenceserver-my_db.service
 #      register: service_result
 #      failed_when: service_result.status.SubState != 'running'
-     - name: Test that SequenceServer service is running for my_db
-       service_facts:
-       failed_when: ansible_facts.services.sequenceserver-my_db.service.state != 'running'
+    - name: Test that SequenceServer service is running for my_db
+      service_facts:
+      failed_when: ansible_facts.services.sequenceserver-my_db.service.state != 'running'
