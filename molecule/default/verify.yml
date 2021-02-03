@@ -11,7 +11,7 @@
     - name: Copy db
       copy:
         src: "{{ item }}"
-        dest: /tmp/test-data
+        dest: /tmp/test-data/
         owner: root
         mode: 0644
       with_fileglob:
@@ -21,11 +21,11 @@
         cmd: "/usr/local/anaconda/envs/blast/bin/blastdbcmd -db /tmp/test-data/my_db -entry all"
       register: blastdbcmd_command
       failed_when: blastdbcmd_command.rc > 0
-#    - name: Test SequenceServer installation
-#      shell: # noqa 301
-#        cmd: "export PATH=$PATH:/usr/local/share/gems/bin && /usr/local/share/gems/bin/sequenceserver --version"
-#      register: sequenceserver_command
-#      failed_when: sequenceserver_command.rc > 0
+    - name: Test SequenceServer installation
+      shell: # noqa 301
+        cmd: "export GEM_PATH=/usr/local/share/gems && /usr/local/share/gems/bin/sequenceserver --version"
+      register: sequenceserver_command
+      failed_when: sequenceserver_command.rc > 0
     - name: Test that SequenceServer service is running for my_db
       systemd:
         name: sequenceserver-my_db.service
