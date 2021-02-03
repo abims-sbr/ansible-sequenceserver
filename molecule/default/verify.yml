@@ -36,7 +36,7 @@
 #      debug:
 #        var: ansible_facts.services
     - name: Service logs
-      shell: # noqa 301 305
+      shell: # noqa 301 303 305
         cmd: "systemctl status sequenceserver-my_db.service"
       register: status
     - name: Display service logs

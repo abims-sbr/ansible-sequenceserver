@@ -10,6 +10,9 @@
       include_role:
         name: robertdebock.rsyslog
       when: (ansible_distribution == "CentOS" or ansible_distribution == "RedHat") and ansible_distribution_major_version == "7"
+    - name: Add user sequenceserver
+      user:
+        name: sequenceserver
     - name: Install miniconda
       include_role:
         name: andrewrothstein.miniconda
