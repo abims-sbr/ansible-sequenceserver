@@ -1,3 +1,4 @@
+- src: robertdebock.rsyslog
 - src: andrewrothstein.miniconda
 - src: andrewrothstein.conda-env
 - src: nginxinc.nginx
