@@ -25,23 +25,8 @@
       when: (ansible_distribution == "CentOS" or ansible_distribution == "RedHat") and ansible_distribution_major_version == "7"
       register: sequenceserver_command
       failed_when: sequenceserver_command.rc > 0
-#    - name: Test that SequenceServer service is running for my_db
-#      systemd:
-#        name: sequenceserver-my_db.service
-#      register: service_result
-#      failed_when: service_result.status.SubState != 'running'
-#    - name: Test that SequenceServer service is running for my_db
-#      service_facts:
-#    - name: Debug service_facts
-#      debug:
-#        var: ansible_facts.services
-    - name: Service logs
-      shell: # noqa 301 303 305
-        cmd: "systemctl status sequenceserver-my_db.service"
-      register: status
-    - name: Display service logs
-      debug:
-        var: status
     - name: Test that SequenceServer service is running for my_db
-      service_facts:
-      failed_when: ansible_facts.services['sequenceserver-my_db.service']['state'] != 'running'
+      systemd:
+        name: sequenceserver-my_db.service
+      register: service_result
+      failed_when: service_result.status.SubState != 'running'
