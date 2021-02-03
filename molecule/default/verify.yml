@@ -21,7 +21,7 @@
       failed_when: sequenceserver_command.rc > 0
     - name: Test SequenceServer installation
       shell: # noqa 301
-        cmd: "export GEM_PATH=/opt/rh/rh-ruby25/root/usr/local/share/gems && /opt/rh/rh-ruby25/root/usr/local/bin/sequenceserver --version"
+        cmd: "export GEM_PATH=/opt/rh/rh-ruby25/root/usr/local/share/gems && export RH_RUBY25_SCLS_ENABLED=rh-ruby25 && /opt/rh/rh-ruby25/root/usr/local/bin/sequenceserver --version"
       when: (ansible_distribution == "CentOS" or ansible_distribution == "RedHat") and ansible_distribution_major_version == "7"
       register: sequenceserver_command
       failed_when: sequenceserver_command.rc > 0
@@ -32,4 +32,9 @@
 #      failed_when: service_result.status.SubState != 'running'
     - name: Test that SequenceServer service is running for my_db
       service_facts:
-      failed_when: ansible_facts.services.sequenceserver-my_db.service.state != 'running'
+    - name: Debug service_facts
+      debug:
+        var: ansible_facts.services
+    - name: Test that SequenceServer service is running for my_db
+      service_facts:
+      failed_when: ansible_facts.services['sequenceserver-my_db.service']['state'] != 'running'
