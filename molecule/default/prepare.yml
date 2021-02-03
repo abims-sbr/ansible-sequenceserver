@@ -22,3 +22,11 @@
         conda_env_name: blast
         conda_env_environment: tests/env.yml
         conda_env_conda_dir: /usr/local/anaconda
+    - name: Copy my_db
+      copy:
+        src: "{{ item }}"
+        dest: /tmp/test-data/
+        owner: root
+        mode: 0644
+      with_fileglob:
+        - tests/test-data/my_db.*
