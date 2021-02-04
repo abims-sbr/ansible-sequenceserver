@@ -9,6 +9,8 @@ An Ansible Role that installs [SequenceServer](https://sequenceserver.com) on Li
 The host must be configured as a SLURM-client and the SequenceServer user must have a SLURM account to be able to submit jobs on the SLURM HPC cluster.
 How to install and configure a SLURM HPC cluster is beyond the scope of this role.
 
+The NCBI BLAST+ tools must be available on the host and on the SLURM HPC cluster (with `module load blast`). They can be installed with [Conda](https://bioconda.github.io/recipes/blast/README.html?blast). BLAST databases must be formatted with `makeblastdb` (see https://sequenceserver.com/doc/#database)
+
 ## Role Variables
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
@@ -39,7 +41,7 @@ If the BLAST server needs another reverse-proxy, it might be needed to add a dir
 Each database is defined as a dictionary of the following parameters:
 - `name` A unique name for the database, used in the URL
 - `port` A unique unused port
-- `path` Absolute path to the formatted database
+- `path` Absolute path to the directory where one or multiple formatted databases are located
 - `users` Optional. Useful if the database needs restricted access. List of authorized users (LDAP "uid").
 - `ldap_businesscategory` Optional. Useful if the database needs restricted access. A ldap businessCategory value. LDAP users with this "businessCategory" value will have access to the database.
 - `web_page_title` Optional. The title displayed at the top of the web page. If not provided, the default title is "BLAST server for `name`".
@@ -49,7 +51,6 @@ Unique `name` and `port` are mandatory for each database.
 The BLAST server title can be customized with the `web_page_title` parameter. If not provided, the default title is "BLAST server for `name`".
 
 SequenceServer logs are stored in `/var/log/sequenceserver/sequenceserver.log`.
-
 
 ```yaml
 # Version of BLAST to use in sequenceserver (called with "module load" in the slurm bash script)
@@ -61,7 +62,7 @@ sequenceserver_blast_threads: 4
 # --mem (SLURM option)
 sequenceserver_blast_mem: 16GB
 ```
-Variables needed to configure the SequenceServer and SLURM job options.
+Variables needed to configure SequenceServer and SLURM job options.
 
 ```yaml
 # URL to get the logo image from
@@ -104,7 +105,7 @@ Roles:
 - name: sequenceserver | install blast server
   hosts: blast_server
   roles:
-    - sequenceserver
+    - abims_sbr.sequenceserver
 ```
 
 ## License
