@@ -1,0 +1,11 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+  roles:
+    - abims_sbr.sequenceserver
+  vars:
+    sequenceserver_blast_binaries: /usr/local/anaconda/envs/blast/bin
+    sequenceserver_blast_db:
+    # yamllint disable-line rule:braces
+      - { name: 'my_db', port: '4567', path: '/tmp/test-data' }
