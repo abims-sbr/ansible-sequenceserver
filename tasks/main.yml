@@ -83,7 +83,7 @@
     - {regexp: 'http://www.sequenceserver.com/#license-and-support', replace: '{{ sequenceserver_support_email }}'}
 
 - name: Modify source erb file for custom web page title | Insert supplementary HTML code on the top of the web page | Check if the file exists
-  stat: 
+  stat:
     path: "{{ sequenceserver_top_web_page_html_path }}"
   register: top_web_page_html_path
 
