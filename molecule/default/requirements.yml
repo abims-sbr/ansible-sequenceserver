@@ -1,7 +1,7 @@
-- src: robertdebock.rsyslog
-- src: andrewrothstein.miniconda
-- src: andrewrothstein.conda-env
-- src: nginxinc.nginx
+- name: robertdebock.rsyslog
+- name: andrewrothstein.miniconda
+- name: andrewrothstein.conda-env
+- name: nginxinc.nginx
   version: 0.12.0
-- src: geerlingguy.git
+- name: geerlingguy.git
   version: 2.1.0
