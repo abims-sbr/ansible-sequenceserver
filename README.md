@@ -76,9 +76,12 @@ sequenceserver_logo_path: ""
 sequenceserver_home_url: "http://sequenceserver.com"
 # URL the "Help and support" icon will point to
 sequenceserver_support_email: "http://www.sequenceserver.com/#license-and-support"
+# Path to the file containing the supplementary HTML code to display at the top of the web page
+sequenceserver_top_web_page_html_path: "~/top_web_page.html"
 ```
 These variables allow to customize the BLAST server web page. They are optional.
 Two variables are available to set the logo displayed on the BLAST server: `sequenceserver_logo_url` or `sequenceserver_logo_path`. If both are set, the logo given with `sequenceserver_logo_path` will override the logo given with `sequenceserver_logo_url`.
+If the file `sequenceserver_top_web_page_html_path` exists, its content will be added in the base RUBY template used to display the web page and will be rendered at the top of the web page. This file must contain HTML code. This can be used, for example, to display information or warning messages to users (service shutdown, etc).
 
 ```yaml
 # User running the sequenceserver service (systemd) and running SLURM blast jobs
