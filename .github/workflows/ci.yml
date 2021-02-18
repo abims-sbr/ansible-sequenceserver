@@ -32,7 +32,7 @@ jobs:
       - name: Lint code.
         run: |
           yamllint .
-          ansible-lint
+          #ansible-lint # because it is broken: see https://github.com/ansible-community/ansible-lint/issues/1329
   molecule:
     name: Molecule
     runs-on: ubuntu-latest
