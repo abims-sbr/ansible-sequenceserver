@@ -87,10 +87,16 @@
     path: "{{ sequenceserver_top_web_page_html_path }}"
   register: top_web_page_html_path
 
+- name: Modify source erb file for custom web page title | Insert supplementary HTML code on the top of the web page | Get the file content
+  slurp:
+    src: "{{ sequenceserver_top_web_page_html_path }}"
+  register: top_web_page_html_file
+  when: top_web_page_html_path.stat.exists
+
 - name: Modify source erb file for custom web page title | Insert supplementary HTML code on the top of the web page | Insert the file content
   blockinfile:
     path: "{{ sequenceserver_file_to_modify_for_custom_web_page }}"
-    block: "{{ lookup('file', sequenceserver_top_web_page_html_path) }}"
+    block: "{{ top_web_page_html_file['content'] | b64decode }}"
     insertafter: "<body>"
     marker: "<!-- {mark} ANSIBLE MANAGED BLOCK -->"
     backup: yes
