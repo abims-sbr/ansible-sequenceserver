@@ -93,7 +93,7 @@
   register: top_web_page_html_file
   when: top_web_page_html_path.stat.exists
 
-- name: Modify source erb file for custom web page title | Insert supplementary HTML code on the top of the web page | Insert the file content
+- name: Modify source erb file for custom web page title | Insert supplementary HTML code on the top of the web page | Insert or update with file content
   blockinfile:
     path: "{{ sequenceserver_file_to_modify_for_custom_web_page }}"
     block: "{{ top_web_page_html_file['content'] | b64decode }}"
@@ -101,6 +101,7 @@
     marker: "<!-- {mark} ANSIBLE MANAGED BLOCK -->"
     backup: yes
   when: top_web_page_html_path.stat.exists
+  notify: Restart all sequenceserver services
 
 - name: Add slurm_sbatch.sh for HPC integration (https://sequenceserver.com/doc/#hpc)
   template:
