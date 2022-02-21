@@ -32,7 +32,6 @@
     - name: Display SequenceServer service logs
       debug:
         msg: "{{ log.content | b64decode }}"
-      when: log.stat.exists
     - name: Test that SequenceServer service is running for my_db
       systemd:
         name: sequenceserver-my_db.service
