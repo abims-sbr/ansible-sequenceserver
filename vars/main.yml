@@ -24,6 +24,8 @@ sequenceserver_config_dir: config
 sequenceserver_extension_dir: extension
 # Contains SLURM scripts
 sequenceserver_hpc_dir: hpc_script
+# Absolute path to the log file
+sequenceserver_log_file: /var/log/sequenceserver/sequenceserver.log
 # Default logo image name (used if sequenceserver_logo_url and sequenceserver_logo_path are not provided)
 sequenceserver_logo: SequenceServer_logo.png
 
