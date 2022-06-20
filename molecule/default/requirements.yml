@@ -1,3 +1,4 @@
+---
 - name: robertdebock.rsyslog
 - name: andrewrothstein.miniconda
 - name: andrewrothstein.conda-env
