@@ -27,12 +27,12 @@ jobs:
           python-version: '3.x'
 
       - name: Install test dependencies.
-        run: pip3 install yamllint ansible-lint[core]
+        run: pip3 install yamllint
 
       - name: Lint code.
         run: |
           yamllint .
-          #ansible-lint # because it is broken: see https://github.com/ansible-community/ansible-lint/issues/1329
+
   molecule:
     name: Molecule
     runs-on: ubuntu-latest
