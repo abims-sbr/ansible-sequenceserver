@@ -24,7 +24,7 @@ ldap_server {{ item.name }}ldap {
 {% endfor %}
 
 server {
-    listen 80;
+    listen 80 default_server;
     server_name {{ sequenceserver_server_name }};
 
 {% for item in sequenceserver_blast_db %}
