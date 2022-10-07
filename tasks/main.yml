@@ -16,7 +16,7 @@
   yum_repository:
     name: centos-sclo-rh
     description: CentOS-7 - SCLo rh
-    baseurl: http://centos.crazyfrogs.org/7/sclo/x86_64/rh/
+    baseurl: http://mirror.centos.org/centos-7/7/sclo/x86_64/rh/
     gpgkey: https://www.centos.org/keys/RPM-GPG-KEY-CentOS-SIG-SCLo
   when: (ansible_distribution == "CentOS" or ansible_distribution == "RedHat") and ansible_distribution_major_version == "7"
 
