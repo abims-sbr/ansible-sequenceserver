@@ -34,11 +34,9 @@ For each element of the list (each database) will be generated a BLAST server ac
 
 If the BLAST server needs another reverse-proxy, it might be needed to add a directive to edit the response header "location" in order to get the right URL for the results page (see [issue#464](https://github.com/wurmlab/sequenceserver/issues/464)). For example, with an apache reverse-proxy:
 ```
-<Location /context/path/blast>
-        ProxyPass               http://hostname/my_db
-        ProxyPassReverse        http://hostname/my_db
-        Header edit Location "(^http[s]?://)([a-zA-Z0-9\.\-]+)(:\d+)?/(/context/path/blast/)?" "/context/path/blast/"
-</Location>
+<LocationMatch "^/(?<instance>[^/]+)/">
+   Header edit Location "(^http[s]?://)([a-zA-Z0-9\.\-]+)(:\d+)?/(%{MATCH_INSTANCE}e/)?" "/%{MATCH_INSTANCE}e/" env=MATCH_INSTANCE
+</LocationMatch>
 ```
 
 Each database is defined as a dictionary of the following parameters:
