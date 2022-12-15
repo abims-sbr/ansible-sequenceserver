@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/abims-sbr/ansible-sequenceserver/workflows/CI/badge.svg?branch=master)](https://github.com/abims-sbr/ansible-sequenceserver/actions?query=workflow%3ACI)
 
-An Ansible Role that installs [SequenceServer](https://sequenceserver.com) on Linux (tested with CentOS 7, Ubuntu 18, Ubuntu 20) and deploys one [NCBI BLAST+](https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastDocs&DOC_TYPE=Download) server for each BLAST database, with the following features:
+An Ansible Role that installs [SequenceServer](https://sequenceserver.com) on Linux (tested with Ubuntu 18, Ubuntu 20) and deploys one [NCBI BLAST+](https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastDocs&DOC_TYPE=Download) server for each BLAST database, with the following features:
 - The BLAST jobs are submitted on a [SLURM](https://slurm.schedmd.com/) HPC cluster.
 - The server are reverse-proxied with NGINX. Restricted access can be configured for private servers, by querying an ldap server.
 - The SequenceServer interface can be minimaly customized (logo, title, support link).
