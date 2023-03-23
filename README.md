@@ -46,6 +46,7 @@ Each database is defined as a dictionary of the following parameters:
 - `users` Optional. Useful if the database needs restricted access. List of authorized users (LDAP "uid").
 - `ldap_businesscategory` Optional. Useful if the database needs restricted access. A ldap businessCategory value. LDAP users with this "businessCategory" value will have access to the database.
 - `web_page_title` Optional. The title displayed at the top of the web page. If not provided, the default title is "BLAST server for `name`".
+- `placeholders` Optional. A dictionary of placeholders that are used to customize top or bottom supplementary HTML code (see `sequenceserver_top_web_page_html_path` and `sequenceserver_bottom_web_page_html_path`). For example `placeholders: { key1: 'value1', key2: 'value2'}`
 
 Unique `name` and `port` are mandatory for each database.
 `users` and `ldap_businesscategory` are optional and can be used to add an authentication layer with the nginx-auth-ldap module. It is planned to add a `groups` parameter soon to list authorized groups.
