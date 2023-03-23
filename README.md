@@ -81,7 +81,7 @@ sequenceserver_bottom_web_page_html_path: "~/bottom_web_page.html"
 ```
 These variables allow to customize the BLAST server web page. They are optional.
 Two variables are available to set the logo displayed on the BLAST server: `sequenceserver_logo_url` or `sequenceserver_logo_path`. If both are set, the logo given with `sequenceserver_logo_path` will override the logo given with `sequenceserver_logo_url`.
-If the files `sequenceserver_top_web_page_html_path` or `sequenceserver_bottom_web_page_html_path` exist, their content will be added in the base RUBY template used to display the web page and will be rendered at the top or bottom of the web page. These files must contain HTML code. This can be used, for example, to display information or warning messages to users (service shutdown, etc).
+If the files `sequenceserver_top_web_page_html_path` or `sequenceserver_bottom_web_page_html_path` exist, their content will be added in the base RUBY template used to display the web page and will be rendered at the top and bottom of the web page. These files must contain HTML code. This can be used, for example, to display information or warning messages to users (service shutdown, etc).
 
 ```yaml
 # User running the sequenceserver service (systemd) and running SLURM blast jobs
