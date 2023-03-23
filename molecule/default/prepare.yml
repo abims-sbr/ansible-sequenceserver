@@ -39,3 +39,9 @@
         dest: /tmp/
         owner: root
         mode: 0644
+    - name: Copy bottom_web_page.html
+      copy:
+        src: tests/bottom_web_page.html
+        dest: /tmp/
+        owner: root
+        mode: 0644

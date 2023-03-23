@@ -45,6 +45,8 @@ sequenceserver_home_url: "http://sequenceserver.com"
 sequenceserver_support_email: "http://www.sequenceserver.com/#license-and-support"
 # Path to the file containing the supplementary HTML code to display at the top of the web page
 sequenceserver_top_web_page_html_path: "~/top_web_page.html"
+# Path to the file containing the supplementary HTML code to display at the bottom of the web page
+sequenceserver_bottom_web_page_html_path: "~/bottom_web_page.html"
 
 # Service (systemd)
 #
