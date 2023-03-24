@@ -119,7 +119,7 @@
     path: "{{ sequenceserver_file_to_modify_for_custom_web_page }}"
     block: "{{ top_web_page_html_file['content'] | b64decode }}"
     insertafter: "<body>"
-    marker: "<!-- {mark} ANSIBLE MANAGED BLOCK -->"
+    marker: "<!-- {mark} ANSIBLE MANAGED BLOCK - TOP -->"
     backup: yes
   when: top_web_page_html_path.stat.exists
   notify: Restart all sequenceserver services
@@ -129,7 +129,7 @@
     path: "{{ sequenceserver_file_to_modify_for_custom_web_page }}"
     block: "{{ bottom_web_page_html_file['content'] | b64decode }}"
     insertafter: "<%= yield %>"
-    marker: "<!-- {mark} ANSIBLE MANAGED BLOCK -->"
+    marker: "<!-- {mark} ANSIBLE MANAGED BLOCK - BOTTOM -->"
     backup: yes
   when: bottom_web_page_html_path.stat.exists
   notify: Restart all sequenceserver services
