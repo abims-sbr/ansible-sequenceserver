@@ -51,7 +51,7 @@
       get_url:
         url: "http://{{ inventory_hostname }}:4567"
         dest: "/tmp/page.html"
-        use_proxy: false
+#        use_proxy: false
       register: web_page
     - name: Test that the SequenceServer home page is rendering the values of the placeholders set for my_db
       lineinfile:
