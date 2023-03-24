@@ -45,14 +45,14 @@
       failed_when: service_result.status.SubState != 'running'
     - name: Test NGINX home page
       get_url:
-        url: "http://localhost:80"
+        url: "http://localhost"
         dest: "/tmp/nginx.html"
-    - name: Test that the web page is served
+    - name: Test SequenceServer home page
       get_url:
-        url: "http://localhost:4567"
+        url: "http://localhost/my_db"
         dest: "/tmp/page.html"
       register: web_page
-    - name: Test that the main web page is rendering the values of the placeholders set for my_db
+    - name: Test that the SequenceServer home page is rendering the values of the placeholders set for my_db
       lineinfile:
         path: web_page.dest
         line: 'Render custom link for this database: <a href="http://testplaceholder.com">my favorite link</a>'
