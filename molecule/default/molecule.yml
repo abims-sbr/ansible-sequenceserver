@@ -15,7 +15,7 @@ platforms:
     exposed_ports:
       - 4567/tcp
     published_ports:
-      - localhost:4567:4567/tcp
+      - 127.0.0.1:4567:4567/tcp
 provisioner:
   name: ansible
   playbooks:
