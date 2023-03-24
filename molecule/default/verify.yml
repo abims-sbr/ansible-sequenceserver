@@ -43,6 +43,10 @@
         name: sequenceserver-my_db.service
       register: service_result
       failed_when: service_result.status.SubState != 'running'
+    - name: Test NGINX home page
+      get_url:
+        url: "http://localhost:80"
+        dest: "/tmp/nginx.html"
     - name: Test that the web page is served
       get_url:
         url: "http://localhost:4567"
