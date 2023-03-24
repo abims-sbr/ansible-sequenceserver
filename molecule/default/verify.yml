@@ -49,7 +49,7 @@
         dest: "/tmp/nginx.html"
     - name: Test SequenceServer home page
       get_url:
-        url: "http://localhost/my_db"
+        url: "http://{{ inventory_hostname }}/my_db"
         dest: "/tmp/page.html"
       register: web_page
     - name: Test that the SequenceServer home page is rendering the values of the placeholders set for my_db
