@@ -26,7 +26,7 @@ Variable to set the version of SequenceServer to install. This role can be used 
 
 ```yaml
 sequenceserver_blast_db:
-#   - { name: 'my_db', port: '4567', path: '/path/to/my/db', users: ['fbar','jsmith'], web_page_title: 'blablabla' }
+#   - { name: 'my_db', port: '4567', path: '/path/to/my/db', users: ['fbar','jsmith'], web_page_title: 'blablabla', placeholders: { key1: 'value1', key2: 'value2'} }
 ```
 This is the variable used to define the BLAST databases.
 
@@ -46,7 +46,7 @@ Each database is defined as a dictionary of the following parameters:
 - `users` Optional. Useful if the database needs restricted access. List of authorized users (LDAP "uid").
 - `ldap_businesscategory` Optional. Useful if the database needs restricted access. A ldap businessCategory value. LDAP users with this "businessCategory" value will have access to the database.
 - `web_page_title` Optional. The title displayed at the top of the web page. If not provided, the default title is "BLAST server for `name`".
-- `placeholders` Optional. A dictionary of placeholders that are used to customize top or bottom supplementary HTML code (see `sequenceserver_top_web_page_html_path` and `sequenceserver_bottom_web_page_html_path`). For example `placeholders: { key1: 'value1', key2: 'value2'}`
+- `placeholders` Optional. A list of placeholder dictionaries `{key: 'key_item', value: 'value_item'}` that are used to customize top or bottom supplementary HTML code (see `sequenceserver_top_web_page_html_path` and `sequenceserver_bottom_web_page_html_path`). For example `placeholders: [{key: 'key1', value: 'value1'},{key: 'key2', value: 'value2'}]`.
 
 Unique `name` and `port` are mandatory for each database.
 `users` and `ldap_businesscategory` are optional and can be used to add an authentication layer with the nginx-auth-ldap module. It is planned to add a `groups` parameter soon to list authorized groups.
@@ -83,6 +83,7 @@ sequenceserver_bottom_web_page_html_path: "~/bottom_web_page.html"
 These variables allow to customize the BLAST server web page. They are optional.
 Two variables are available to set the logo displayed on the BLAST server: `sequenceserver_logo_url` or `sequenceserver_logo_path`. If both are set, the logo given with `sequenceserver_logo_path` will override the logo given with `sequenceserver_logo_url`.
 If the files `sequenceserver_top_web_page_html_path` or `sequenceserver_bottom_web_page_html_path` exist, their content will be added in the base RUBY template used to display the web page and will be rendered at the top and bottom of the web page. These files must contain HTML code. This can be used, for example, to display information or warning messages to users (service shutdown, etc).
+Placeholders set in the database parameter `placeholders` (see above) can be used to customize the HTML code in these files. For example, if the database has the parameter `placeholders: [{key: 'key_item', value: 'value_item'}]`, the snippet `<%= SequenceServer::key_item %>` will be replaced by the string `value_item` in the rendered HTML code.
 
 ```yaml
 # User running the sequenceserver service (systemd) and running SLURM blast jobs
