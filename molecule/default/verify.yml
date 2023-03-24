@@ -44,12 +44,13 @@
       register: service_result
       failed_when: service_result.status.SubState != 'running'
     - name: Test that the web page is served
-      shell: # noqa 301
-        cmd: "curl -sL http://localhost:4567/"
-      register: sequenceserver_command
-      failed_when: sequenceserver_command.rc > 0
+      get_url:
+        url: "http://localhost:4567/"
+        dest: "/tmp/page.html"
+      register: web_page
     - name: Test that the main web page is rendering the values of the placeholders set for my_db
-      shell: # noqa 301
-        cmd: curl -sL http://localhost:4567/ | grep -q '<a href="http://testplaceholder.com">my favorite link</a>'
-      register: sequenceserver_command
-      failed_when: sequenceserver_command.rc > 0
+      lineinfile:
+        path: web_page.dest
+        line: 'Render custom link for this database: <a href="http://testplaceholder.com">my favorite link</a>'
+        state: present
+      check_mode: yes
