@@ -64,7 +64,7 @@
         msg: "{{ etc_hosts.content | b64decode }}"
     - name: Test SequenceServer home page
       get_url:
-        url: "http://localhost:4567"
+        url: "http://127.0.0.1:4567"
         dest: "/tmp/page.html"
 #        use_proxy: false
       register: sequenceserver_page
