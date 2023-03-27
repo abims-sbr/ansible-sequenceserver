@@ -49,7 +49,7 @@
         dest: "/tmp/nginx.html"
     - name: Test SequenceServer home page
       get_url:
-        url: "http://{{ inventory_hostname }}:4567"
+        url: "http://172.17.0.2:4567"
         dest: "/tmp/page.html"
 #        use_proxy: false
       register: web_page
