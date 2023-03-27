@@ -61,6 +61,9 @@
         dest: "/tmp/page.html"
 #        use_proxy: false
       register: sequenceserver_page
+    - name: Test SequenceServer home page - debug
+      debug:
+        var: sequenceserver_page
     - name: Test that the SequenceServer home page is rendering the values of the placeholders set for my_db
       lineinfile:
         path: "{{ sequenceserver_page.dest }}"
