@@ -7,7 +7,7 @@ module SequenceServer
 {% if item.placeholders is defined and item.placeholders %}
   {% for placeholder in item.placeholders %}
     {% if placeholder.key is defined and placeholder.key and placeholder.value is defined and placeholder.value %}
-  {{ placeholder.key }} = '{{ placeholder.value }}'
+  {{ placeholder.key[0]|upper}}{{placeholder.key[1:] }} = '{{ placeholder.value }}'
     {% endif %}
   {% endfor %}
 {% endif %}

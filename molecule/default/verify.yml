@@ -47,21 +47,7 @@
       get_url:
         url: "http://localhost"
         dest: "/tmp/nginx.html"
-    - name: Get /etc/hosts file content
-      slurp:
-        src: "/etc/hosts"
-      register: etc_hosts
-    - name: Display /etc/hosts file content
-      debug:
-        msg: "{{ etc_hosts.content | b64decode }}"
-    - name: Get listening ports
-      community.general.listen_ports_facts:
-        command: 'ss'
-      register: listening_ports
-    - name: Display listening ports
-      debug:
-        msg: "{{ (ansible_facts.tcp_listen + ansible_facts.udp_listen) | map(attribute='port') | unique | sort | list }}"
-    - name: Test SequenceServer home page with curl
+    - name: Test SequenceServer home page with curl # same thing tried with the ansible get_url module without success
       shell: # noqa 301
         cmd: "curl -sL http://localhost:4567 -o /tmp/home.html"
       register: sequenceserver_command
@@ -78,11 +64,6 @@
         cmd: curl -sL http://localhost:4567 | grep -q '<a href="http://testplaceholder.com">my favorite link</a>'
       register: sequenceserver_command
       failed_when: sequenceserver_command.rc > 0
-    - name: Test SequenceServer home page
-      get_url:
-        url: "http://0.0.0.0:4567"
-        dest: "/tmp/page.html"
-      register: sequenceserver_page
     - name: Test that the SequenceServer home page is rendering the values of the placeholders set for my_db
       lineinfile:
         path: "{{ sequenceserver_page.dest }}"
