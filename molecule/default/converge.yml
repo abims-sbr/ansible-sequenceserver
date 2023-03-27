@@ -5,7 +5,6 @@
   roles:
     - abims_sbr.sequenceserver
   vars:
-    sequenceserver_version: ${{ matrix.sequenceserver_version }}
     sequenceserver_blast_binaries: /usr/local/anaconda/envs/blast/bin
     sequenceserver_blast_db:
       # yamllint disable-line rule:braces

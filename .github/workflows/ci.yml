@@ -42,9 +42,6 @@ jobs:
         distro:
           - ubuntu1804
           - ubuntu2004
-        sequenceserver_version:
-          - 2.0.0rc8
-          - 2.0.0
 
     steps:
       - name: Check out the codebase.
