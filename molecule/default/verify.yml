@@ -66,13 +66,13 @@
         cmd: "curl -sL http://localhost:4567 -o /tmp/home.html"
       register: sequenceserver_command
       failed_when: sequenceserver_command.rc > 0
-    - name: Get /tmp/home.html file content
+    - name: Get SequenceServer home page content
       slurp:
         src: "/tmp/home.html"
-      register: etc_hosts
-    - name: Display /tmp/home.html file content
+      register: sequenceserver_page
+    - name: Display SequenceServer home page file content
       debug:
-        msg: "{{ /tmp/home.html.content | b64decode }}"
+        msg: "{{ sequenceserver_page.content | b64decode }}"
     - name: Test that the SequenceServer home page is rendering the values of the placeholders set for my_db
       shell: # noqa 301
         cmd: curl -sL http://localhost:4567 | grep -q '<a href="http://testplaceholder.com">my favorite link</a>'
