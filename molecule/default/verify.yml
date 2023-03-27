@@ -62,9 +62,16 @@
     - name: Display /etc/hosts file content
       debug:
         msg: "{{ etc_hosts.content | b64decode }}"
+    - name: Get listening ports
+      community.general.listen_ports_facts:
+        command: 'ss'
+      register: listening_ports
+    - name: Display listening ports
+      debug:
+        msg: "{{ (ansible_facts.tcp_listen + ansible_facts.udp_listen) | map(attribute='port') | unique | sort | list }}"
     - name: Test SequenceServer home page
       get_url:
-        url: "http://127.0.0.1:4567"
+        url: "http://0.0.0.0:4567"
         dest: "/tmp/page.html"
 #        use_proxy: false
       register: sequenceserver_page
