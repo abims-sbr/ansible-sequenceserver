@@ -92,25 +92,46 @@
     - {regexp: '{{ sequenceserver_logo_title_regexp }}', replace: '{{ sequenceserver_logo_title_replace }}'}
     - {regexp: 'http://www.sequenceserver.com/#license-and-support', replace: '{{ sequenceserver_support_email }}'}
 
-- name: Modify source erb file for custom web page title | Insert supplementary HTML code on the top of the web page | Check if the file exists
+- name: Modify source erb file for custom web page title | Insert supplementary HTML code at the top of the web page | Check if the file exists
   stat:
     path: "{{ sequenceserver_top_web_page_html_path }}"
   register: top_web_page_html_path
 
-- name: Modify source erb file for custom web page title | Insert supplementary HTML code on the top of the web page | Get the file content
+- name: Modify source erb file for custom web page title | Insert supplementary HTML code at the bottom of the web page | Check if the file exists
+  stat:
+    path: "{{ sequenceserver_bottom_web_page_html_path }}"
+  register: bottom_web_page_html_path
+
+- name: Modify source erb file for custom web page title | Insert supplementary HTML code at the top of the web page | Get the file content
   slurp:
     src: "{{ sequenceserver_top_web_page_html_path }}"
   register: top_web_page_html_file
   when: top_web_page_html_path.stat.exists
+
+- name: Modify source erb file for custom web page title | Insert supplementary HTML code at the bottom of the web page | Get the file content
+  slurp:
+    src: "{{ sequenceserver_bottom_web_page_html_path }}"
+  register: bottom_web_page_html_file
+  when: bottom_web_page_html_path.stat.exists
 
 - name: Modify source erb file for custom web page title | Insert supplementary HTML code on the top of the web page | Insert or update with file content
   blockinfile:
     path: "{{ sequenceserver_file_to_modify_for_custom_web_page }}"
     block: "{{ top_web_page_html_file['content'] | b64decode }}"
     insertafter: "<body>"
-    marker: "<!-- {mark} ANSIBLE MANAGED BLOCK -->"
+    marker: "<!-- {mark} ANSIBLE MANAGED BLOCK - TOP -->"
     backup: yes
   when: top_web_page_html_path.stat.exists
+  notify: Restart all sequenceserver services
+
+- name: Modify source erb file for custom web page title | Insert supplementary HTML code at the bottom of the web page | Insert or update with file content
+  blockinfile:
+    path: "{{ sequenceserver_file_to_modify_for_custom_web_page }}"
+    block: "{{ bottom_web_page_html_file['content'] | b64decode }}"
+    insertafter: "<%= yield %>"
+    marker: "<!-- {mark} ANSIBLE MANAGED BLOCK - BOTTOM -->"
+    backup: yes
+  when: bottom_web_page_html_path.stat.exists
   notify: Restart all sequenceserver services
 
 - name: Add slurm_sbatch.sh for HPC integration (https://sequenceserver.com/doc/#hpc)

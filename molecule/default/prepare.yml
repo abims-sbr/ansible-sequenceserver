@@ -6,6 +6,10 @@
     - name: Update apt cache.
       apt: update_cache=true cache_valid_time=600
       when: ansible_os_family == 'Debian'
+    - name: Install dependencies.
+      package:
+        name:
+          - curl
     - name: Install rsyslog
       include_role:
         name: robertdebock.rsyslog
@@ -36,6 +40,12 @@
     - name: Copy top_web_page.html
       copy:
         src: tests/top_web_page.html
+        dest: /tmp/
+        owner: root
+        mode: 0644
+    - name: Copy bottom_web_page.html
+      copy:
+        src: tests/bottom_web_page.html
         dest: /tmp/
         owner: root
         mode: 0644
