@@ -55,15 +55,19 @@
     - name: Display NGINX page content
       debug:
         msg: "{{ nginx_page_html.content | b64decode }}"
+    - name: Get /etc/hosts file content
+      slurp:
+        src: "/etc/hosts"
+      register: etc_hosts
+    - name: Display /etc/hosts file content
+      debug:
+        msg: "{{ etc_hosts.content | b64decode }}"
     - name: Test SequenceServer home page
       get_url:
         url: "http://localhost:4567"
         dest: "/tmp/page.html"
 #        use_proxy: false
       register: sequenceserver_page
-    - name: Test SequenceServer home page - debug
-      debug:
-        var: sequenceserver_page
     - name: Test that the SequenceServer home page is rendering the values of the placeholders set for my_db
       lineinfile:
         path: "{{ sequenceserver_page.dest }}"
