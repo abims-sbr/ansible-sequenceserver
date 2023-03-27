@@ -47,15 +47,23 @@
       get_url:
         url: "http://localhost"
         dest: "/tmp/nginx.html"
+      register: nginx_page
+    - name: Get NGINX page content
+      slurp:
+        src: nginx_page.dest
+      register: nginx_page_html
+    - name: Display NGINX page content
+      debug:
+        msg: "{{ nginx_page_html.content | b64decode }}"
     - name: Test SequenceServer home page
       get_url:
-        url: "http://172.17.0.2:4567"
+        url: "http://localhost:4567"
         dest: "/tmp/page.html"
 #        use_proxy: false
-      register: web_page
+      register: sequenceserver_page
     - name: Test that the SequenceServer home page is rendering the values of the placeholders set for my_db
       lineinfile:
-        path: web_page.dest
+        path: sequenceserver_page.dest
         line: 'Render custom link for this database: <a href="http://testplaceholder.com">my favorite link</a>'
         state: present
       check_mode: yes
