@@ -15,7 +15,7 @@ sequenceserver_version: 2.0.0
 # groups: TODO. Optional. Useful if the database needs restricted access. List of authorized groups.
 # ldap_businesscategory: Optional. Useful if the database needs restricted access. A ldap businessCategory value. Ldap users with this businessCategory value will have access to the database.
 # web_page_title: Optional. The title displayed at the top of the web page. If not provided, the default title is "BLAST server for <name>".
-# placeholders: Optional. A list of placeholder dictionaries `{key: 'key_item',value: 'value_item'}` that are used to customize top or bottom supplementary HTML code (`sequenceserver_top_web_page_html_path` and `sequenceserver_bottom_web_page_html_path`)
+# placeholders: Optional. A list of placeholder dictionaries `{key: 'key_item', value: 'value_item'}` that are used to customize top or bottom supplementary HTML code (`sequenceserver_top_web_page_html_path` and `sequenceserver_bottom_web_page_html_path`)
 #
 sequenceserver_blast_db:
 #   - name: 'my_db'
@@ -23,7 +23,7 @@ sequenceserver_blast_db:
 #     path: '/path/to/my/db'
 #     users: ['fbar','jsmith']
 #     web_page_title: 'blablabla'
-#     placeholders: [{key: 'key1',value: 'value1'}, {key: 'key2',value: 'value2'}]
+#     placeholders: [{key: 'key1', value: 'value1'}, {key: 'key2', value: 'value2'}]
 
 # NCBI BLAST and SLURM variables
 # Used in the slurm bash scripts
