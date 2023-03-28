@@ -18,7 +18,12 @@ sequenceserver_version: 2.0.0
 # placeholders: Optional. A list of placeholder dictionaries `{key: 'key_item', value: 'value_item'}` that are used to customize top or bottom supplementary HTML code (`sequenceserver_top_web_page_html_path` and `sequenceserver_bottom_web_page_html_path`)
 #
 sequenceserver_blast_db:
-#   - { name: 'my_db', port: '4567', path: '/path/to/my/db', users: ['fbar','jsmith'], web_page_title: 'blablabla', placeholders: [{ key: 'key1', value: 'value1'}, { key: 'key2', value: 'value2'}] }
+#   - name: 'my_db'
+#     port: '4567'
+#     path: '/path/to/my/db'
+#     users: ['fbar','jsmith']
+#     web_page_title: 'blablabla'
+#     placeholders: [{ key: 'key1', value: 'value1'}, { key: 'key2', value: 'value2'}]
 
 # NCBI BLAST and SLURM variables
 # Used in the slurm bash scripts

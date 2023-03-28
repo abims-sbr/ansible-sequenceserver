@@ -26,7 +26,12 @@ Variable to set the version of SequenceServer to install. This role can be used 
 
 ```yaml
 sequenceserver_blast_db:
-#   - { name: 'my_db', port: '4567', path: '/path/to/my/db', users: ['fbar','jsmith'], web_page_title: 'blablabla', placeholders: [{key: 'key1', value: 'value1'}, {key: 'key2', value: 'value2'}] }
+    - name: 'my_db'
+      port: '4567'
+      path: '/path/to/my/db'
+      users: ['fbar','jsmith']
+      web_page_title: 'blablabla'
+      placeholders: [{key: 'key1', value: 'value1'}, {key: 'key2', value: 'value2'}]
 ```
 This is the variable used to define the BLAST databases.
 
@@ -83,7 +88,7 @@ sequenceserver_bottom_web_page_html_path: "~/bottom_web_page.html"
 These variables allow to customize the BLAST server web page. They are optional.
 Two variables are available to set the logo displayed on the BLAST server: `sequenceserver_logo_url` or `sequenceserver_logo_path`. If both are set, the logo given with `sequenceserver_logo_path` will override the logo given with `sequenceserver_logo_url`.
 If the files `sequenceserver_top_web_page_html_path` or `sequenceserver_bottom_web_page_html_path` exist, their content will be added in the base RUBY template used to display the web page and will be rendered at the top and bottom of the web page. These files must contain HTML code. This can be used, for example, to display information or warning messages to users (service shutdown, etc).
-Placeholders set in the database parameter `placeholders` (see above) can be used to customize the HTML code in these files. For example, if the database has the parameter `placeholders: [{key: 'key_item', value: 'value_item'}]`, the snippet `<%= SequenceServer::Key_item %>` will be replaced by the string `value_item` in the rendered HTML code. Please note that the first letter must be upper case in the snippet to be correctly interpreted as a Ruby constant by SequenceServer.
+Placeholders set in the database parameter `placeholders` (see above) can be used to customize the HTML code in these files. For example, if the database has the parameter `placeholders: [{key: 'key_item', value: 'value_item'}]`, the snippet `<% if defined?(SequenceServer::Key_item) %><%= SequenceServer::Key_item %>` will be replaced by the string `value_item` in the rendered HTML code. Please note that the first letter must be upper case in the snippet to be correctly interpreted as a Ruby constant by SequenceServer.
 
 ```yaml
 # User running the sequenceserver service (systemd) and running SLURM blast jobs
