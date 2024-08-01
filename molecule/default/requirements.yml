@@ -4,6 +4,6 @@
 - name: andrewrothstein.conda-env
 - name: andrewrothstein.bash
 - name: nginxinc.nginx
-  version: 0.24.3
+  version: 0.24.2
 - name: geerlingguy.git
   version: 3.0.1
