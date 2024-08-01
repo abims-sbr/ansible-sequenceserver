@@ -3,13 +3,15 @@
 # NGINX
 
 - name: Install needed package to fix update_cache failure.
-  package:
+  ansible.builtin.apt:
     name:
       - apt-transport-https
       - dirmngr
       - ca-certificates
       - gnupg
       - gpg-agent
+    update_cache: true
+    state: latest
 - name: Update apt cache.
   apt: update_cache=true cache_valid_time=600
   when: ansible_os_family == 'Debian'
