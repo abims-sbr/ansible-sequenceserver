@@ -2,6 +2,11 @@
 
 # NGINX
 
+- name: Install needed package to fix update_cache failure.
+  package:
+    name:
+      - apt-transport-https
+
 - name: Install Nginx
   include_role:
     name: nginxinc.nginx
