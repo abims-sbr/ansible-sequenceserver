@@ -3,6 +3,10 @@
   hosts: all
   become: true
   tasks:
+    - name: Install apt-transport-https before using update_cache.
+      package:
+        name:
+          - apt-transport-https
     - name: Update apt cache.
       apt: update_cache=true cache_valid_time=600
       when: ansible_os_family == 'Debian'
