@@ -52,7 +52,7 @@ Each database is defined as a dictionary of the following parameters:
 - `path` Absolute path to the directory where one or multiple formatted databases are located
 - `users` Optional. Useful if the database needs restricted access. List of authorized users (LDAP "uid").
 - `ldap_businesscategory` Optional. Useful if the database needs restricted access. A ldap businessCategory value. LDAP users with this "businessCategory" value will have access to the database.
-- `group` Optional. Useful if the database needs restricted access. An LDAP group ("gid"). LDAP users member of this group will have access to the database.
+- `group` Optional. Useful if the database needs restricted access. An LDAP group ("gid"). LDAP users who are member of this group will have access to the database.
 - `web_page_title` Optional. The title displayed at the top of the web page. If not provided, the default title is "BLAST server for `name`".
 - `placeholders` Optional. A list of placeholder dictionaries `{key: 'key_item', value: 'value_item'}` that are used to customize top or bottom supplementary HTML code (see `sequenceserver_top_web_page_html_path` and `sequenceserver_bottom_web_page_html_path`). For example `placeholders: [{key: 'key1', value: 'value1'}, {key: 'key2', value: 'value2'}]`.
 
