@@ -16,3 +16,9 @@
     sequenceserver_bottom_web_page_html_path: "/tmp/bottom_web_page.html"
     sequenceserver_home_url: "http://myfavoritewebsite.com"
     sequenceserver_support_email: "mailto:amazingsupport@myfavoritewebsite.com"
+
+  pre_tasks:
+    - name: Update apt cache.
+      apt: update_cache=yes cache_valid_time=600
+      when: ansible_os_family == 'Debian'
+      changed_when: false
