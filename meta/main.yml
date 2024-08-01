@@ -2,7 +2,7 @@
 
 dependencies:
   - role: nginxinc.nginx
-    version: 0.24.2
+    version: 0.24.3
     tags: never
   - role: geerlingguy.git
     version: 3.0.1
