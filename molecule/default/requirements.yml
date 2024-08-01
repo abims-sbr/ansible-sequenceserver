@@ -2,6 +2,7 @@
 - name: robertdebock.rsyslog
 - name: andrewrothstein.miniconda
 - name: andrewrothstein.conda-env
+- name: andrewrothstein.bash
 - name: nginxinc.nginx
   version: 0.24.3
 - name: geerlingguy.git
