@@ -16,3 +16,7 @@ provisioner:
   name: ansible
   playbooks:
     converge: converge.yml
+  config_options:
+    defaults:
+      stdout_callback: debug
+      stderr_callback: debug
