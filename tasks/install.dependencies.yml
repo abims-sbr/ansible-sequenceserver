@@ -10,7 +10,6 @@
       - ca-certificates
       - gnupg
       - gpg-agent
-    update_cache: true
     state: latest
 - name: Update apt cache.
   apt: update_cache=true cache_valid_time=600
