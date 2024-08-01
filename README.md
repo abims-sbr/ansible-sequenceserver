@@ -52,11 +52,12 @@ Each database is defined as a dictionary of the following parameters:
 - `path` Absolute path to the directory where one or multiple formatted databases are located
 - `users` Optional. Useful if the database needs restricted access. List of authorized users (LDAP "uid").
 - `ldap_businesscategory` Optional. Useful if the database needs restricted access. A ldap businessCategory value. LDAP users with this "businessCategory" value will have access to the database.
+- `group` Optional. Useful if the database needs restricted access. An LDAP group ("gid"). LDAP users member of this group will have access to the database.
 - `web_page_title` Optional. The title displayed at the top of the web page. If not provided, the default title is "BLAST server for `name`".
 - `placeholders` Optional. A list of placeholder dictionaries `{key: 'key_item', value: 'value_item'}` that are used to customize top or bottom supplementary HTML code (see `sequenceserver_top_web_page_html_path` and `sequenceserver_bottom_web_page_html_path`). For example `placeholders: [{key: 'key1', value: 'value1'}, {key: 'key2', value: 'value2'}]`.
 
 Unique `name` and `port` are mandatory for each database.
-`users` and `ldap_businesscategory` are optional and can be used to add an authentication layer with the nginx-auth-ldap module. It is planned to add a `groups` parameter soon to list authorized groups.
+`users`, `ldap_businesscategory` and `group` are optional and can be used to add an authentication layer with the nginx-auth-ldap module. Choose one single authentication mode for each database.
 The BLAST server title can be customized with the `web_page_title` parameter. If not provided, the default title is "BLAST server for `name`".
 
 SequenceServer logs are stored in `/var/log/sequenceserver/sequenceserver.log`.
@@ -101,12 +102,12 @@ Variable to define the user running the sequenceserver service and submitting th
 ```yaml
 # proxy_read_timeout (nginx directive)
 sequenceserver_proxy_read_timeout: 180
-# Authentication with LDAP - Mandatory if users, groups or ldap_businesscategory are used in variable sequenceserver_blast_db
+# Authentication with LDAP - Mandatory if users or groups are used in variable sequenceserver_blast_db
 # Sequenceserver_ldap_url: "ldap://ldap.my-domain.org/o=my-domain,c=org?uid?sub?"
 sequenceserver_ldap_url: ""
 ```
 Variables to configure the NGINX reverse-proxy.
-`sequenceserver_ldap_url` must be set if one of the database has restricted access (use of parameter `users`, `groups` or `ldap_businesscategory` in `sequenceserver_blast_db`).
+`sequenceserver_ldap_url` must be set if one of the database has restricted access (use of parameter `users` or `group` in `sequenceserver_blast_db`).
 
 ## Dependencies
 
