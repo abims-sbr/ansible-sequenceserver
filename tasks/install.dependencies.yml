@@ -3,8 +3,10 @@
 # NGINX
 
 - name: shell command
-  ansible.builtin.shell: apt-get update && apt-get -y install apt-transport-https ca-certificates gnupg gpg-agent
+  ansible.builtin.shell: touch /tmp/test
   register: data
+- name: shell command
+  ansible.builtin.shell: apt-get update && apt-get -y install apt-transport-https ca-certificates gnupg gpg-agent
 - name: print all returned values
   debug:
     msg: "{{ data }}"
