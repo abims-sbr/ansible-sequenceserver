@@ -62,7 +62,7 @@ sequenceserver_user: "sequenceserver"
 # NGINX
 #
 # NGINX version to install
-sequenceserver_nginx_version: 1.26.1
+sequenceserver_nginx_version: 1.26.1-1~focal
 # proxy_read_timeout (nginx directive)
 sequenceserver_proxy_read_timeout: 180
 # Authentication with LDAP - Mandatory if users or groups are used in variable sequenceserver_blast_db
