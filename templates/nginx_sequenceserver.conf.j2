@@ -3,22 +3,27 @@
 #
 
 {% for item in sequenceserver_blast_db %}
-{% if (item.users is defined and item.users) or (item.ldap_businesscategory is defined and item.ldap_businesscategory) %}
+{% if (item.users is defined and item.users) or (item.ldap_businesscategory is defined and item.ldap_businesscategory) or (item.group is defined and item.group) %}
 ldap_server {{ item.name }}ldap {
-{# if only users are defined #}
-{% if item.users is defined and item.users %}
-    url {{ sequenceserver_ldap_url }}(&(objectClass=person)(|{% for user in item.users %}(uid={{ user }}){% endfor %}));
-{% endif %}
-{# if only a business category is defined #}
-{% if item.ldap_businesscategory is defined and item.ldap_businesscategory %}
-    url {{ sequenceserver_ldap_url }}(&(objectClass=person)(businessCategory={{ item.ldap_businesscategory }}));
-{% endif %}
-{# if both users and a business category are defined #}
-{% if (item.users is defined and item.users) and (item.ldap_businesscategory is defined and item.ldap_businesscategory) %}
-    url {{ sequenceserver_ldap_url }}(&(objectClass=person)(|{% for user in item.users %}(uid={{ user }}){% endfor %}(businessCategory={{ item.ldap_businesscategory }})));
-{% endif %}
+{# if a group is defined #}
+{% if item.group is defined and item.group %}
+    url {{ sequenceserver_ldap_url }}(&(objectClass=person));
+    group_attribute memberUid
+    group_attribute_is_dn on;
+    require group cn={{ item.group }},ou=projects,ou=groups,dc=sb-roscoff,dc=fr;
     require valid_user;
     satisfy all;
+{# if a business category is defined #}
+{% elif item.ldap_businesscategory is defined and item.ldap_businesscategory %}
+    url {{ sequenceserver_ldap_url }}(&(objectClass=person)(businessCategory={{ item.ldap_businesscategory }}));
+    require valid_user;
+    satisfy all;
+{# if users are defined #}
+{% elif item.users is defined and item.users %}
+    url {{ sequenceserver_ldap_url }}(&(objectClass=person)(|{% for user in item.users %}(uid={{ user }}){% endfor %}));
+    require valid_user;
+    satisfy all;
+{% endif %}
 }
 {% endif %}
 {% endfor %}
@@ -39,7 +44,7 @@ server {
 {% if sequenceserver_proxy_intercept_errors is defined and sequenceserver_proxy_intercept_errors %}
         proxy_intercept_errors {{ sequenceserver_proxy_intercept_errors }};
 {% endif %}
-{% if (item.users is defined and item.users) or (item.ldap_businesscategory is defined and item.ldap_businesscategory) %}
+{% if (item.users is defined and item.users) or (item.ldap_businesscategory is defined and item.ldap_businesscategory) or (item.group is defined and item.group) %}
         auth_ldap "Restricted access";
         auth_ldap_servers {{ item.name }}ldap;
 {% endif %}

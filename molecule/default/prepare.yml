@@ -49,3 +49,8 @@
         dest: /tmp/
         owner: root
         mode: 0644
+    # https://github.com/geerlingguy/docker-ubuntu2004-ansible/issues/24
+    - name: Set right permissions for /tmp dir, needed for apt-get update used in role nginxinc.nginx
+      ansible.builtin.file:
+        path: /tmp
+        mode: '1777'

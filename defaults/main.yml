@@ -12,7 +12,7 @@ sequenceserver_version: 2.0.0
 # port: A unique unused port
 # path: Path to the formatted database
 # users: Optional. Useful if the database needs restricted access. List of authorized users (ldap uid).
-# groups: TODO. Optional. Useful if the database needs restricted access. List of authorized groups.
+# group: Optional. Useful if the database needs restricted access. Authorized group (ldap gid).
 # ldap_businesscategory: Optional. Useful if the database needs restricted access. A ldap businessCategory value. Ldap users with this businessCategory value will have access to the database.
 # web_page_title: Optional. The title displayed at the top of the web page. If not provided, the default title is "BLAST server for <name>".
 # placeholders: Optional. A list of placeholder dictionaries `{key: 'key_item', value: 'value_item'}` that are used to customize top or bottom supplementary HTML code (`sequenceserver_top_web_page_html_path` and `sequenceserver_bottom_web_page_html_path`)
@@ -63,6 +63,6 @@ sequenceserver_user: "sequenceserver"
 #
 # proxy_read_timeout (nginx directive)
 sequenceserver_proxy_read_timeout: 180
-# Authentication with LDAP - Mandatory if users, groups or ldap_businesscategory are used in variable sequenceserver_blast_db
+# Authentication with LDAP - Mandatory if users or groups are used in variable sequenceserver_blast_db
 # Sequenceserver_ldap_url: "ldap://ldap.my-domain.org/o=my-domain,c=org?uid?sub?"
 sequenceserver_ldap_url: ""
