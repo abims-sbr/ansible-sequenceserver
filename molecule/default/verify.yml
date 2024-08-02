@@ -25,12 +25,6 @@
       when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "20"
       register: sequenceserver_command
       failed_when: sequenceserver_command.rc > 0
-    - name: CentOS 7 | Test SequenceServer installation
-      shell: # noqa 301
-        cmd: "export GEM_PATH=/opt/rh/rh-ruby25/root/usr/local/share/gems && export RH_RUBY25_SCLS_ENABLED=rh-ruby25 && /usr/bin/scl enable rh-ruby25 -- /opt/rh/rh-ruby25/root/usr/local/bin/sequenceserver --version" # noqa 204
-      when: (ansible_distribution == "CentOS" or ansible_distribution == "RedHat") and ansible_distribution_major_version == "7"
-      register: sequenceserver_command
-      failed_when: sequenceserver_command.rc > 0
     - name: Get SequenceServer service logs
       slurp:
         src: "/var/log/sequenceserver/sequenceserver.log"
