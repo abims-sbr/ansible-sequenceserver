@@ -100,8 +100,8 @@ sequenceserver_user: "sequenceserver"
 Variable to define the user running the sequenceserver service and submitting the SLURM jobs. This user must have a SLURM account.
 
 ```yaml
-# NGINX version to install
-sequenceserver_nginx_version: 1.26.1
+# NGINX version to install, from https://nginx.org/packages/mainline
+sequenceserver_nginx_version: 1.25.5-1~focal
 # proxy_read_timeout (nginx directive)
 sequenceserver_proxy_read_timeout: 180
 # Authentication with LDAP - Mandatory if users or groups are used in variable sequenceserver_blast_db
