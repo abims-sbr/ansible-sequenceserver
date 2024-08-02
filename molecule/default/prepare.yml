@@ -58,4 +58,4 @@
       include_role:
         name: nginxinc.nginx
       vars:
-        nginx_version: 1.23.1-1~focal
+        nginx_version: =1.23.1-1~focal
