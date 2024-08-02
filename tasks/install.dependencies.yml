@@ -33,7 +33,7 @@
   include_role:
     name: nginxinc.nginx
   vars:
-    nginx_version: "={{ sequenceserver_nginx_version }}"
+    nginx_version: "={{ sequenceserver_nginx_version }}-1~focal"
 
 # NGINX LDAP authentication
 

@@ -101,7 +101,7 @@ Variable to define the user running the sequenceserver service and submitting th
 
 ```yaml
 # NGINX version to install, from https://nginx.org/packages/mainline
-sequenceserver_nginx_version: 1.25.5-1~focal
+sequenceserver_nginx_version: 1.25.5
 # proxy_read_timeout (nginx directive)
 sequenceserver_proxy_read_timeout: 180
 # Authentication with LDAP - Mandatory if users or groups are used in variable sequenceserver_blast_db
