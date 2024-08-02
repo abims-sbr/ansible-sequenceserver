@@ -4,7 +4,10 @@
 
 - name: shell command
   ansible.builtin.shell: apt-get update && apt-get -y install apt-transport-https ca-certificates gnupg gpg-agent
-
+  register: data
+- name: print all returned values
+  debug:
+    msg: "{{ data }}"
 - name: Install needed package to fix update_cache failure.
   ansible.builtin.apt:
     name:
@@ -14,10 +17,6 @@
       - gpg-agent
     update_cache: true
     state: latest
-    register: data
-- name: print all returned values
-  debug:
-    msg: "{{ data }}"
 - name: Install Nginx
   include_role:
     name: nginxinc.nginx
