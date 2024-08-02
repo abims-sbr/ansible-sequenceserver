@@ -2,6 +2,9 @@
 
 # NGINX
 
+- name: shell command
+  ansible.builtin.shell: apt-get update && apt-get -y install apt-transport-https ca-certificates gnupg gpg-agent
+
 - name: Install needed package to fix update_cache failure.
   ansible.builtin.apt:
     name:
