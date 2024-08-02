@@ -37,7 +37,7 @@
         name: "{{ sequenceserver_ruby_base }}"
       when: sequenceserver_installed_ruby_version < 3
 
-  when: not get_nginx_version.failed
+  when: not get_ruby_version.failed
 
 - name: Install Ruby
   include_role:
