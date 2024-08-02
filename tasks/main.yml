@@ -25,13 +25,13 @@
 
     - name: Set sequenceserver_installed_ruby_version variable
       set_fact:
-        sequenceserver_installed_ruby_version: "{{ get_ruby_version.stderr | regex_search('ruby (?P<version>\\d+\\)', '\\g<version>') | first }}"
+        sequenceserver_installed_ruby_version: "{{ get_ruby_version.stderr | regex_search('ruby (?P<version>\\d+)', '\\g<version>') | first }}"
 
     - name: Display installed Ruby version
       ansible.builtin.debug:
         var: sequenceserver_installed_ruby_version
 
-    - name: Uninstall Ruby Ubuntu packages
+    - name: Uninstall Ubuntu packages for Ruby
       package:
         state: absent
         name: "{{ sequenceserver_ruby_base }}"
