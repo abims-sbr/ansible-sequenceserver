@@ -2,9 +2,39 @@
 
 # NGINX
 
+- name: Get installed Nginx version
+  command:
+    cmd: nginx -v
+  register: get_nginx_version
+  check_mode: no
+  failed_when: get_nginx_version.rc != 0
+  changed_when: false
+
+- name: Uninstall NGINX if already installed
+  block:
+
+    - name: Set sequenceserver_installed_nginx_version variable
+      set_fact:
+        sequenceserver_installed_nginx_version: "{{ get_nginx_version.stderr | regex_search('nginx/(?P<version>\\d+\\.\\d+\\.\\d+)', '\\g<version>') | first }}"
+
+    - name: Display installed NGINX version
+      ansible.builtin.debug:
+        var: sequenceserver_installed_nginx_version
+
+    - name: Uninstall Nginx
+      include_role:
+        name: nginxinc.nginx
+      vars:
+        nginx_setup: "uninstall"
+      when: sequenceserver_installed_nginx_version != sequenceserver_nginx_version
+
+  when: not get_nginx_version.failed
+
 - name: Install Nginx
   include_role:
     name: nginxinc.nginx
+  vars:
+    nginx_version: "={{ sequenceserver_nginx_version }}-1~focal"
 
 # NGINX LDAP authentication
 
@@ -18,16 +48,6 @@
 
 - name: Install the nginx-ldap-auth module when not present
   block:
-
-    - name: Get installed Nginx version
-      command:
-        cmd: nginx -v
-      register: get_nginx_version
-      check_mode: no
-
-    - name: Set sequenceserver_nginx_version variable
-      set_fact:
-        sequenceserver_nginx_version: "{{ get_nginx_version.stderr | regex_search('nginx/(?P<version>\\d+\\.\\d+\\.\\d+)', '\\g<version>') | first }}"
 
     - name: Create directory for nginx related sources if it does not exist
       file:

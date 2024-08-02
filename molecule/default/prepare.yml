@@ -54,3 +54,8 @@
       ansible.builtin.file:
         path: /tmp
         mode: '1777'
+    - name: Install previous Nginx version, to test uninstall
+      include_role:
+        name: nginxinc.nginx
+      vars:
+        nginx_version: =1.23.1-1~focal
