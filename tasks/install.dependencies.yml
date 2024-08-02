@@ -11,6 +11,10 @@
       - gpg-agent
     update_cache: true
     state: latest
+    register: data
+- name: print all returned values
+  debug:
+    msg: "{{ data }}"
 - name: Install Nginx
   include_role:
     name: nginxinc.nginx
