@@ -14,7 +14,7 @@ galaxy_info:
   namespace: abims_sbr
   description: Installs SequenceServer on Linux and deploys one NCBI BLAST+ server for each BLAST database, reverse-proxied by NGINX, submitting jobs on a SLURM HPC cluster. # noqa 204
   issue_tracker_url: https://github.com/abims-sbr/ansible-sequenceserver/issues
-  company: "CNRS, Sorbonne Université, UMR8227 / FR2424 (ABiMS), Station Biologique, 29680, Roscoff, France"
+  company: "CNRS, Sorbonne Université, Station Biologique, 29680, Roscoff, France"
   license: "license (MIT)"
   min_ansible_version: 2.4
   platforms:
