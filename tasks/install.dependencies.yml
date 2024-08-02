@@ -8,6 +8,7 @@
   register: get_nginx_version
   check_mode: no
   failed_when: get_nginx_version.rc != 0
+  changed_when: false
 
 - name: Uninstall NGINX if already installed
   block:
