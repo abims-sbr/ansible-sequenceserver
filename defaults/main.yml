@@ -3,7 +3,7 @@
 # Ruby gem
 #
 # Version of the ruby gem to install (>= 2.0.0)
-sequenceserver_version: 2.0.0
+sequenceserver_version: 2.2.0
 
 # List of blast databases
 #
@@ -29,7 +29,7 @@ sequenceserver_blast_db:
 # Used in the slurm bash scripts
 #
 # Version of BLAST to use in sequenceserver (called with "module load" in the slurm bash script)
-sequenceserver_blast_version: 2.12.0
+sequenceserver_blast_version: 2.14.0
 # Absolute path to the blast binaries
 sequenceserver_blast_binaries: "~/conda3/envs/blast-{{ sequenceserver_blast_version }}/bin"
 # --cpus-per-task (SLURM option)
@@ -61,7 +61,7 @@ sequenceserver_user: "sequenceserver"
 
 # NGINX
 #
-# NGINX version to install
+# NGINX version to install, from https://nginx.org/packages/mainline
 sequenceserver_nginx_version: 1.25.5
 # proxy_read_timeout (nginx directive)
 sequenceserver_proxy_read_timeout: 180
