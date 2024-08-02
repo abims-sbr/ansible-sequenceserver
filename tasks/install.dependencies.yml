@@ -6,14 +6,11 @@
   ansible.builtin.apt:
     name:
       - apt-transport-https
-      - dirmngr
       - ca-certificates
       - gnupg
       - gpg-agent
+    update_cache: true
     state: latest
-- name: Update apt cache.
-  apt: update_cache=true cache_valid_time=600
-  when: ansible_os_family == 'Debian'
 - name: Install Nginx
   include_role:
     name: nginxinc.nginx
