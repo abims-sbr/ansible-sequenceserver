@@ -55,3 +55,9 @@
         name: nginxinc.nginx
       vars:
         nginx_version: =1.23.1-1~focal
+    - name: Install Ruby from Ubuntu package, to test uninstall
+      package:
+        state: present
+        name:
+          - ruby-full
+          - ruby-dev

@@ -1,5 +1,9 @@
 ---
 
+# Ruby
+#
+sequenceserver_ruby_version: 3.3.4
+
 # Ruby gem
 #
 # Absolute path to gem install directory

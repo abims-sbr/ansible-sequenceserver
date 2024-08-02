@@ -12,19 +12,39 @@
 - name: Install Dependencies
   include_tasks: install.dependencies.yml
 
-- name: CentOS 7 | Add repository
-  yum_repository:
-    name: centos-sclo-rh
-    description: CentOS-7 - SCLo rh
-    baseurl: http://mirror.centos.org/centos-7/7/sclo/x86_64/rh/
-    gpgkey: https://www.centos.org/keys/RPM-GPG-KEY-CentOS-SIG-SCLo
-  when: (ansible_distribution == "CentOS" or ansible_distribution == "RedHat") and ansible_distribution_major_version == "7"
+- name: Get installed Ruby version
+  command:
+    cmd: ruby -v
+  register: get_ruby_version
+  check_mode: no
+  failed_when: get_ruby_version.rc != 0
+  changed_when: false
 
-- name: Install packages
-  package:
-    state: present
-    name: "{{ sequenceserver_ruby_base }}"
-  when: sequenceserver_ruby_base is defined
+- name: Uninstall Ruby if already installed and not the right version
+  block:
+
+    - name: Set sequenceserver_installed_ruby_version variable
+      set_fact:
+        sequenceserver_installed_ruby_version: "{{ get_ruby_version.stderr | regex_search('ruby (?P<version>\\d+\\)', '\\g<version>') | first }}"
+
+    - name: Display installed Ruby version
+      ansible.builtin.debug:
+        var: sequenceserver_installed_ruby_version
+
+    - name: Uninstall Ruby Ubuntu packages
+      package:
+        state: absent
+        name: "{{ sequenceserver_ruby_base }}"
+      when: sequenceserver_installed_ruby_version < 3
+
+  when: not get_nginx_version.failed
+
+- name: Install Ruby
+  include_role:
+    name: geerlingguy.ruby
+  vars:
+    ruby_install_from_source: true
+    ruby_version: "{{ sequenceserver_ruby_version }}"
 
 - name: Include os specific tasks
   include_tasks: "{{ item }}"
