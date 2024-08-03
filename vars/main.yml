@@ -3,6 +3,7 @@
 # Ruby
 #
 sequenceserver_ruby_version: 3.3.4
+sequenceserver_ruby_download_url: "http://cache.ruby-lang.org/pub/ruby/3.0/ruby-{{ sequenceserver_ruby_version }}.tar.gz"
 
 # Ruby gem
 #

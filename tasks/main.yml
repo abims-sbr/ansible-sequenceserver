@@ -45,6 +45,7 @@
   vars:
     ruby_install_from_source: true
     ruby_version: "{{ sequenceserver_ruby_version }}"
+    ruby_download_url: "{{ sequenceserver_ruby_download_url }}"
 
 - name: Include os specific tasks
   include_tasks: "{{ item }}"
