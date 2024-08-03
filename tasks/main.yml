@@ -23,9 +23,13 @@
 - name: Uninstall Ruby if already installed and not the right version
   block:
 
+    - name: Display get_ruby_version
+      ansible.builtin.debug:
+        var: get_ruby_version
+
     - name: Set sequenceserver_installed_ruby_version variable
       set_fact:
-        sequenceserver_installed_ruby_version: "{{ get_ruby_version.stderr | regex_search('ruby (?P<version>\\d+)', '\\g<version>') | first }}"
+        sequenceserver_installed_ruby_version: "{{ get_ruby_version.stderr | regex_search('ruby (?P<version>\\d+).\\.*', '\\g<version>') | first }}"
 
     - name: Display installed Ruby version
       ansible.builtin.debug:
