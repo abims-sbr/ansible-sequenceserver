@@ -35,7 +35,7 @@
       package:
         state: absent
         name: "{{ sequenceserver_ruby_base }}"
-      when: sequenceserver_installed_ruby_version < 3
+      when: sequenceserver_installed_ruby_version|int < 3
 
   when: not get_ruby_version.failed
 
