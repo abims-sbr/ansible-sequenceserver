@@ -7,6 +7,9 @@ dependencies:
   - role: geerlingguy.git
     version: 3.0.1
     tags: never
+  - role: geerlingguy.ruby
+    version: 3.2.0
+    tags: never
 
 galaxy_info:
   role_name: sequenceserver

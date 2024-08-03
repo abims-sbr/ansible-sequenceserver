@@ -7,3 +7,5 @@
   version: 0.24.3
 - name: geerlingguy.git
   version: 3.0.1
+- name: geerlingguy.ruby
+  version: 3.2.0

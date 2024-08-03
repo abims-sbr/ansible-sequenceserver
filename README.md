@@ -116,6 +116,7 @@ Variables to configure the NGINX reverse-proxy.
 Roles:
  - [nginxinc.nginx](https://galaxy.ansible.com/nginxinc/nginx)
  - [geerlingguy.git](https://galaxy.ansible.com/geerlingguy/git)
+ - [geerlingguy.ruby](https://galaxy.ansible.com/geerlingguy/ruby)
 
 ## Example Playbook
 
