@@ -17,7 +17,7 @@
     cmd: ruby -v
   register: get_ruby_version
   check_mode: no
-  failed_when: get_ruby_version.rc != 0
+  failed_when: get_ruby_version.rc > 0
   changed_when: false
 
 - name: Uninstall Ruby if already installed and not the right version
