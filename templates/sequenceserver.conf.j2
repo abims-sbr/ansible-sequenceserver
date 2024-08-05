@@ -1,5 +1,5 @@
 :port: '{{ item.port }}'
 :database_dir: '{{ item.path }}'
 {% if item.conf_options is defined and item.conf_options %}
-{{ conf_options | to_yaml }}
+{{ item.conf_options | from_yaml }}
 {% endif %}
