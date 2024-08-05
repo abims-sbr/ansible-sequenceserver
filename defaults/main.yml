@@ -30,7 +30,7 @@ sequenceserver_blast_db:
 # Used in the slurm bash scripts
 #
 # Version of BLAST to use in sequenceserver (called with "module load" in the slurm bash script)
-sequenceserver_blast_version: 2.14.0
+sequenceserver_blast_version: 2.15.0
 # Absolute path to the blast binaries
 sequenceserver_blast_binaries: "~/conda3/envs/blast-{{ sequenceserver_blast_version }}/bin"
 # --cpus-per-task (SLURM option)
