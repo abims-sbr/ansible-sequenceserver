@@ -60,7 +60,7 @@
         msg: "{{ sequenceserver_page.content | b64decode }}"
     - name: Check title in home page content
       shell: # noqa 301
-        cmd: curl -sL http://localhost:4567 | grep -q 'http://myfavoritewebsite.com'
+        cmd: curl -sL http://localhost:4567 | grep -q 'BLAST server for my_db'
       register: grep_title
       failed_when: grep_title.rc > 0
     - name: Check support email in home page content
@@ -85,7 +85,7 @@
       failed_when: grep_placeholder.rc > 0
     - name: Get the lib modified for hpc integration
       slurp:
-        src: "/usr/local/share/gems/gems/sequenceserver-2.2.0/lib/sequenceserver/blast/job.rb"
+        src: "/usr/local/share/gems/gems/sequenceserver-3.1.2/lib/sequenceserver/blast/job.rb"
       register: lib_modified_for_hpc_integration
     - name: Display content of the lib modified for hpc integration
       debug:
