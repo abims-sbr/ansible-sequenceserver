@@ -182,8 +182,8 @@
     marker: "<!-- {mark} ANSIBLE MANAGED BLOCK - TOP -->"
     backup: yes
   with_items:
-    - sequenceserver_file_to_modify_for_custom_web_page_first
-    - sequenceserver_file_to_modify_for_custom_web_page_second
+    - "{{ sequenceserver_file_to_modify_for_custom_web_page_first }}"
+    - "{{ sequenceserver_file_to_modify_for_custom_web_page_second }}"
   when: top_web_page_html_path.stat.exists and sequenceserver_version is defined and sequenceserver_version != "2.2.0" and sequenceserver_version != "2.0.0.rc8"
   notify: Restart all sequenceserver services
 
@@ -195,8 +195,8 @@
     marker: "<!-- {mark} ANSIBLE MANAGED BLOCK - BOTTOM -->"
     backup: yes
   with_items:
-    - sequenceserver_file_to_modify_for_custom_web_page_first
-    - sequenceserver_file_to_modify_for_custom_web_page_second
+    - "{{ sequenceserver_file_to_modify_for_custom_web_page_first }}"
+    - "{{ sequenceserver_file_to_modify_for_custom_web_page_second }}"
   when: bottom_web_page_html_path.stat.exists and sequenceserver_version is defined and sequenceserver_version != "2.2.0" and sequenceserver_version != "2.0.0.rc8"
   notify: Restart all sequenceserver services
 
