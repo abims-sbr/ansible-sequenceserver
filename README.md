@@ -34,6 +34,7 @@ sequenceserver_blast_db:
       users: ['fbar','jsmith']
       web_page_title: 'blablabla'
       placeholders: [{key: 'key1', value: 'value1'}, {key: 'key2', value: 'value2'}]
+      conf_options: [{key: 'job_lifetime', value: '10080'}, {key: 'databases_widget', value: 'tree'}, {key: 'options', value: {'blastn': {'default': ['-task blastn', '-evalue 1e-5'], 'short-seq': ['-task blastn-short', '-evalue 1e-1']}}}]
 ```
 This is the variable used to define the BLAST databases.
 
@@ -55,7 +56,7 @@ Each database is defined as a dictionary of the following parameters:
 - `group` Optional. Useful if the database needs restricted access. An LDAP group ("gid"). LDAP users who are member of this group will have access to the database.
 - `web_page_title` Optional. The title displayed at the top of the web page. If not provided, the default title is "BLAST server for `name`".
 - `placeholders` Optional. A list of placeholder dictionaries `{key: 'key_item', value: 'value_item'}` that are used to customize top or bottom supplementary HTML code (see `sequenceserver_top_web_page_html_path` and `sequenceserver_bottom_web_page_html_path`). For example `placeholders: [{key: 'key1', value: 'value1'}, {key: 'key2', value: 'value2'}]`.
-- `conf_options` Optional. A list of supplementary SequenceServer configuration options dictionaries `{key: 'key_item', value: 'value_item'}` (see [SequenceServer documentation](https://sequenceserver.com/doc/#basics)). For example `conf_options: [{key: 'job_lifetime', value: '10080'}, {key: 'databases_widget', value: 'tree'}]`.
+- `conf_options` Optional. A list of supplementary SequenceServer configuration options as dictionaries `{key: 'key_item', value: 'value_item'}` (see [SequenceServer documentation](https://sequenceserver.com/doc/#basics)). For example `[{key: 'job_lifetime', value: '10080'}, {key: 'databases_widget', value: 'tree'}, {key: 'options', value: {'blastn': {'default': ['-task blastn', '-evalue 1e-5'], 'short-seq': ['-task blastn-short', '-evalue 1e-1']}}}]`
 
 Unique `name` and `port` are mandatory for each database.
 `users`, `ldap_businesscategory` and `group` are optional and can be used to add an authentication layer with the nginx-auth-ldap module. Choose one single authentication mode for each database.

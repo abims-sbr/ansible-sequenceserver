@@ -1,9 +1,22 @@
 :port: '{{ item.port }}'
 :database_dir: '{{ item.path }}'
 {% if item.conf_options is defined and item.conf_options %}
-{% for option in item.conf_options %}
-{% if option.key is defined and option.key and option.value is defined and option.value %}
-:{{ option.key }}: '{{ option.value }}'
+{% for conf_option in item.conf_options %}
+{% if conf_option.key is defined and conf_option.key and conf_option.value is defined and conf_option.value %}
+{% if conf_option.key != 'options' %}
+:{{ conf_option.key }}: '{{ conf_option.value }}'
+{% else %}
+:options:
+{% for blast_type, blast_configs in conf_option.value.items() %}
+  :{{ blast_type }}:
+{% for blast_config, blast_params in blast_configs.items() %}
+    :{{ blast_config }}:
+{% for blast_param in blast_params %}
+    - {{ blast_param }}
+{% endfor %}
+{% endfor %}
+{% endfor %}
+{% endif %}
 {% endif %}
 {% endfor %}
 {% endif %}
