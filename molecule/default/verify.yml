@@ -74,7 +74,7 @@
       failed_when: grep_placeholder.rc > 0
     - name: Get lib modified for hpc integration
       slurp:
-        src: "{{ sequenceserver_lib_to_modify_for_hpc_integration }}"
+        src: "/usr/local/share/gems/gems/sequenceserver-2.2.0/lib/sequenceserver/blast/job.rb"
       register: lib_to_modify_for_hpc_integration
     - name: Display content of lib modified for hpc integration
       debug:
