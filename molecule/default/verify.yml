@@ -70,7 +70,7 @@
       failed_when: grep_support.rc > 0
     - name: Check that the home page is rendering the values of the placeholders set for my_db
       debug:
-        msg: "{{ sequenceserver_page.content | b64decode | regex_findall('<a href="http://testplaceholder.com">my favorite link</a>') | first }}"
+        msg: "{{ sequenceserver_page.content | b64decode | regex_findall('<a href=\"http://testplaceholder.com\">my favorite link</a>') | first }}"
       register: grep_placeholder
       failed_when: grep_placeholder.rc > 0
     - name: Check custom html in home page content (top)
