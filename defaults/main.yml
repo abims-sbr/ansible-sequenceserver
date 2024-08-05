@@ -3,7 +3,7 @@
 # Ruby gem
 #
 # Version of the ruby gem to install (>= 2.0.0)
-sequenceserver_version: 2.2.0
+sequenceserver_version: 3.1.2
 
 # List of blast databases
 #
