@@ -11,9 +11,10 @@ sequenceserver_ruby_download_url: "http://cache.ruby-lang.org/pub/ruby/3.3/ruby-
 sequenceserver_gem_install_dir: "{{ sequenceserver_gem_root_path }}/usr/local/share/gems"
 # Absolute path to the directory where the logo image is copied
 sequenceserver_web_public_repository: "{{ sequenceserver_gem_install_dir }}/gems/sequenceserver-{{ sequenceserver_version }}/public"
-# File that is modified to customize the blast server (logo, title and support link)
+# Files that are modified to customize the blast server (logo, title and support link)
 # Need sequenceserver version >= 2.0.0
-sequenceserver_file_to_modify_for_custom_web_page: "{{ sequenceserver_gem_install_dir }}/gems/sequenceserver-{{ sequenceserver_version }}/views/layout.erb"
+sequenceserver_file_to_modify_for_custom_web_page_first: "{{ sequenceserver_gem_install_dir }}/gems/sequenceserver-{{ sequenceserver_version }}/views/layout.erb"
+sequenceserver_file_to_modify_for_custom_web_page_second: "{{ sequenceserver_gem_install_dir }}/gems/sequenceserver-{{ sequenceserver_version }}/views/search_layout.erb"
 # File that is modified for HPC integration (SLURM)
 # Need sequenceserver version >= 2.0.0
 sequenceserver_lib_to_modify_for_hpc_integration: "{{ sequenceserver_gem_install_dir }}/gems/sequenceserver-{{ sequenceserver_version }}/lib/sequenceserver/blast/job.rb"
