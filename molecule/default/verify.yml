@@ -83,3 +83,14 @@
       set_fact:
         grep_slurm_batch: "{{ lib_modified_for_hpc_integration.content | b64decode | regex_findall('slurm_sbatch.sh') | first }}"
       failed_when: grep_slurm_batch != 'slurm_sbatch.sh'
+    - name: Get the SequenceServer configuration file of my_db
+      slurp:
+        src: "/etc/sequenceserver/config/sequenceserver.my_db.conf"
+      register: my_db_conf
+    - name: Display content of the SequenceServer configuration file of my_db
+      debug:
+        msg: "{{ my_db_conf.content | b64decode }}"
+    - name: Check that conf_option is in the SequenceServer configuration file of my_db
+      set_fact:
+        grep_slurm_batch: "{{ my_db_conf.content | b64decode | regex_findall('databases_widget') | first }}"
+      failed_when: grep_slurm_batch != 'databases_widget'
