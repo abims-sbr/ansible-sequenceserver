@@ -22,7 +22,7 @@ Available variables are listed below, along with default values (see `defaults/m
 
 ```yaml
 # Version of the ruby gem to install (>= 2.0.0)
-sequenceserver_version: 2.0.0
+sequenceserver_version: 2.2.0
 ```
 Variable to set the version of SequenceServer to install. This role can be used with SequenceServer version >= 2.0.0.
 
@@ -64,7 +64,7 @@ SequenceServer logs are stored in `/var/log/sequenceserver/sequenceserver.log`.
 
 ```yaml
 # Version of BLAST to use in sequenceserver (called with "module load" in the slurm bash script)
-sequenceserver_blast_version: 2.12.0
+sequenceserver_blast_version: 2.14.0
 # Absolute path to the blast binaries
 sequenceserver_blast_binaries: "~/conda3/envs/blast-{{ sequenceserver_blast_version }}/bin"
 # --cpus-per-task (SLURM option)
@@ -116,6 +116,7 @@ Variables to configure the NGINX reverse-proxy.
 Roles:
  - [nginxinc.nginx](https://galaxy.ansible.com/nginxinc/nginx)
  - [geerlingguy.git](https://galaxy.ansible.com/geerlingguy/git)
+ - [geerlingguy.ruby](https://galaxy.ansible.com/geerlingguy/ruby)
 
 ## Example Playbook
 
