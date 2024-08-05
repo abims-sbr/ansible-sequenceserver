@@ -48,28 +48,28 @@
       debug:
         msg: "{{ sequenceserver_page.content | b64decode }}"
     - name: Check title in home page content
-      debug:
-        msg: "{{ sequenceserver_page.content | b64decode | regex_findall('http://myfavoritewebsite.com') | first }}"
+      shell: # noqa 301
+        cmd: curl -sL http://localhost:4567 | grep -q 'http://myfavoritewebsite.com'
       register: grep_title
       failed_when: grep_title.rc > 0
     - name: Check support email in home page content
-      debug:
-        msg: "{{ sequenceserver_page.content | b64decode | regex_findall('mailto:amazingsupport@myfavoritewebsite.com') | first }}"
+      shell: # noqa 301
+        cmd: curl -sL http://localhost:4567 | grep -q 'mailto:amazingsupport@myfavoritewebsite.com'
       register: grep_support
       failed_when: grep_support.rc > 0
     - name: Check custom html in home page content (top)
-      debug:
-        msg: "{{ sequenceserver_page.content | b64decode | regex_findall('My message') | first }}"
+      shell: # noqa 301
+        cmd: curl -sL http://localhost:4567 | grep -q 'My message'
       register: grep_custom_html_top
       failed_when: grep_custom_html_top.rc > 0
     - name: Check custom html in home page content (bottom)
-      debug:
-        msg: "{{ sequenceserver_page.content | b64decode | regex_findall('Render custom string for this database') | first }}"
+      shell: # noqa 301
+        cmd: curl -sL http://localhost:4567 | grep -q 'Render custom string for this database'
       register: grep_custom_html_bottom
       failed_when: grep_custom_html_bottom.rc > 0
     - name: Check that the home page is rendering the values of the placeholders set for my_db
-      debug:
-        msg: "{{ sequenceserver_page.content | b64decode | regex_findall('<a href=\"http://testplaceholder.com\">my favorite link</a>') | first }}"
+      shell: # noqa 301
+        cmd: curl -sL http://localhost:4567 | grep -q '<a href="http://testplaceholder.com">my favorite link</a>'
       register: grep_placeholder
       failed_when: grep_placeholder.rc > 0
     - name: Get lib modified for hpc integration
@@ -80,7 +80,7 @@
       debug:
         msg: "{{ sequenceserver_lib_to_modify_for_hpc_integration.content | b64decode }}"
     - name: Check title in home page content
-      debug:
-        msg: "{{ sequenceserver_lib_to_modify_for_hpc_integration.content | b64decode | regex_findall('slurm_sbatch.sh') | first }}"
+      shell: # noqa 301
+        cmd: curl -sL http://localhost:4567 | grep -q 'slurm_sbatch.sh'
       register: grep_slurm_batch
       failed_when: grep_slurm_batch.rc > 0
