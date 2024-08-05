@@ -58,9 +58,9 @@
     - name: Display SequenceServer home page content
       debug:
         msg: "{{ sequenceserver_page.content | b64decode }}"
-    - name: Check title in home page content
+    - name: Check home url in home page content
       shell: # noqa 301
-        cmd: curl -sL http://localhost:4567 | grep -q 'http://myfavoritewebsite.com'
+        cmd: curl -sL http://localhost:4567 | grep -q 'BLAST server for my_db'
       register: grep_title
       failed_when: grep_title.rc > 0
     - name: Check support email in home page content

@@ -95,6 +95,8 @@
 
 - name: Modify source erb file for custom web page title and source lib for HPC integration | Set regexp | Default
   set_fact:
+    sequenceserver_home_url_regexp: 'https://sequenceserver.com'
+    sequenceserver_home_url_replace: '{{ sequenceserver_home_url }}'
     sequenceserver_logo_regexp: 'sequenceserver_logo.webp'
     sequenceserver_logo_replace: '{{ sequenceserver_logo }}'
     sequenceserver_title_regexp: '<%= SequenceServer::VERSION %>'
@@ -124,6 +126,7 @@
     replace: "{{ item.replace }}"
     backup: yes
   with_items:
+    - {regexp: '{{ sequenceserver_home_url_regexp }}', replace: '{{ sequenceserver_home_url_replace }}'}
     - {regexp: '{{ sequenceserver_logo_regexp }}', replace: '{{ sequenceserver_logo_replace }}'}
     - {regexp: '{{ sequenceserver_title_regexp }}', replace: '{{ sequenceserver_title_replace }}'}
     - {regexp: '{{ sequenceserver_support_regexp }}', replace: '{{ sequenceserver_support_email }}'}
