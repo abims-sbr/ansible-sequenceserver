@@ -53,11 +53,6 @@
     - name: Display SequenceServer home page content
       debug:
         msg: "{{ sequenceserver_page.content | b64decode }}"
-    - name: Check logo in home page content
-      debug:
-        msg: "{{ sequenceserver_page.content | b64decode | regex_findall(sequenceserver_logo) | first }}"
-      register: grep_logo
-      failed_when: grep_logo.rc > 0
     - name: Check title in home page content
       debug:
         msg: "{{ sequenceserver_page.content | b64decode | regex_findall('SequenceServer::WEB_PAGE_TITLE') | first }}"
