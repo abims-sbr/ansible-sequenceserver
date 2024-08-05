@@ -5,7 +5,7 @@
 {% if conf_option.key is defined and conf_option.key and conf_option.value is defined and conf_option.value %}
 {% if conf_option.key != 'options' %}
 :{{ conf_option.key }}: '{{ conf_option.value }}'
-{% elif %}
+{% else %}
 :options:
 {% for blast_type, blast_configs in conf_option.value.items() %}
   :{{ blast_type }}:
