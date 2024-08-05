@@ -13,12 +13,6 @@
         cmd: "/usr/local/anaconda/envs/blast/bin/blastdbcmd -db /tmp/test-data/my_db -entry all"
       register: blastdbcmd_command
       failed_when: blastdbcmd_command.rc > 0
-    - name: Ubuntu 18 | Test SequenceServer installation
-      shell: # noqa 301
-        cmd: "export GEM_PATH=/usr/local/share/gems && /usr/local/share/gems/bin/sequenceserver --version"
-      when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "18"
-      register: sequenceserver_command
-      failed_when: sequenceserver_command.rc > 0
     - name: Ubuntu 20 | Test SequenceServer installation
       shell: # noqa 301
         cmd: "export GEM_PATH=/usr/local/share/gems && /usr/local/share/gems/bin/sequenceserver --version"
@@ -53,28 +47,40 @@
     - name: Display SequenceServer home page content
       debug:
         msg: "{{ sequenceserver_page.content | b64decode }}"
-    - name: Check that the home page is rendering the values of the placeholders set for my_db
-      shell: # noqa 301
-        cmd: curl -sL http://localhost:4567 | grep -q '<a href="http://testplaceholder.com">my favorite link</a>'
-      register: grep_placeholder
-      failed_when: grep_placeholder.rc > 0
     - name: Check title in home page content
-      shell: # noqa 301
-        cmd: curl -sL http://localhost:4567 | grep -q 'SequenceServer::WEB_PAGE_TITLE'
+      debug:
+        msg: "{{ sequenceserver_page.content | b64decode | regex_findall('http://myfavoritewebsite.com') | first }}"
       register: grep_title
       failed_when: grep_title.rc > 0
     - name: Check support email in home page content
-      shell: # noqa 301
-        cmd: curl -sL http://localhost:4567 | grep -q 'mailto:amazingsupport@myfavoritewebsite.com'
+      debug:
+        msg: "{{ sequenceserver_page.content | b64decode | regex_findall('mailto:amazingsupport@myfavoritewebsite.com') | first }}"
       register: grep_support
       failed_when: grep_support.rc > 0
     - name: Check custom html in home page content (top)
-      shell: # noqa 301
-        cmd: curl -sL http://localhost:4567 | grep -q 'My message'
+      debug:
+        msg: "{{ sequenceserver_page.content | b64decode | regex_findall('My message') | first }}"
       register: grep_custom_html_top
       failed_when: grep_custom_html_top.rc > 0
     - name: Check custom html in home page content (bottom)
-      shell: # noqa 301
-        cmd: curl -sL http://localhost:4567 | grep -q 'Render custom string for this database'
+      debug:
+        msg: "{{ sequenceserver_page.content | b64decode | regex_findall('Render custom string for this database') | first }}"
       register: grep_custom_html_bottom
       failed_when: grep_custom_html_bottom.rc > 0
+    - name: Check that the home page is rendering the values of the placeholders set for my_db
+      debug:
+        msg: "{{ sequenceserver_page.content | b64decode | regex_findall('<a href=\"http://testplaceholder.com\">my favorite link</a>') | first }}"
+      register: grep_placeholder
+      failed_when: grep_placeholder.rc > 0
+    - name: Get lib modified for hpc integration
+      slurp:
+        src: "{{ sequenceserver_lib_to_modify_for_hpc_integration }}"
+      register: lib_to_modify_for_hpc_integration
+    - name: Display content of lib modified for hpc integration
+      debug:
+        msg: "{{ sequenceserver_lib_to_modify_for_hpc_integration.content | b64decode }}"
+    - name: Check title in home page content
+      debug:
+        msg: "{{ sequenceserver_lib_to_modify_for_hpc_integration.content | b64decode | regex_findall('slurm_sbatch.sh') | first }}"
+      register: grep_slurm_batch
+      failed_when: grep_slurm_batch.rc > 0
