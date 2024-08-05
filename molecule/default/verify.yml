@@ -72,15 +72,14 @@
         cmd: curl -sL http://localhost:4567 | grep -q '<a href="http://testplaceholder.com">my favorite link</a>'
       register: grep_placeholder
       failed_when: grep_placeholder.rc > 0
-    - name: Get lib modified for hpc integration
+    - name: Get the lib modified for hpc integration
       slurp:
         src: "/usr/local/share/gems/gems/sequenceserver-2.2.0/lib/sequenceserver/blast/job.rb"
-      register: lib_to_modify_for_hpc_integration
-    - name: Display content of lib modified for hpc integration
+      register: lib_modified_for_hpc_integration
+    - name: Display content of the lib modified for hpc integration
       debug:
-        msg: "{{ sequenceserver_lib_to_modify_for_hpc_integration.content | b64decode }}"
-    - name: Check title in home page content
-      shell: # noqa 301
-        cmd: curl -sL http://localhost:4567 | grep -q 'slurm_sbatch.sh'
-      register: grep_slurm_batch
-      failed_when: grep_slurm_batch.rc > 0
+        msg: "{{ lib_modified_for_hpc_integration.content | b64decode }}"
+    - name: Check that slurm_sbatch.sh is in the lib modified for hpc integration
+      set_fact:
+        grep_slurm_batch: "{{ lib_modified_for_hpc_integration.content | b64decode | regex_findall('slurm_sbatch.sh') | first }}"
+      failed_when: grep_slurm_batch != 'slurm_sbatch.sh'
