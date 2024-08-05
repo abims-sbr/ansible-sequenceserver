@@ -1,2 +1,9 @@
 :port: '{{ item.port }}'
 :database_dir: '{{ item.path }}'
+{% if item.conf_options is defined and item.conf_options %}
+{% for option in item.conf_options %}
+{% if option.key is defined and option.key and option.value is defined and option.value %}
+:{{ option.key }}: '{{ option.value }}'
+{% endif %}
+{% endfor %}
+{% endif %}
